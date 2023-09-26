@@ -1,0 +1,13 @@
+/* Body */
+
+
+.content-wrapper,
+.right-side {
+  overflow: auto;
+  max-height: 100vh;
+}
+
+table.dataTable tbody tr.selected {
+  pointer-events: none
+}
+
