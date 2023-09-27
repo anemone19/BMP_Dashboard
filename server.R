@@ -45,63 +45,53 @@ server <- function(input, output, session) {
   
   # ABI descriptions
   # Value boxes for displaying the descriptions of the three KPIs
+  output$S_H_about <- renderValueBox(customValueBox(
+    subtitle = paste(par_s_h),
+    value = "Species and Habitat Score",
+    background = "lightgray",
+    color = "black"
+  ))
   
-  # Display description for species and habitat score information
-  valuebox_server("S_H_about",
-                  subtitle = paste(par_s_h),
-                  value = "Species and Habitat Score",
-                  icon = "chart-area",
-                  background = "lightgray",
-                  color = "black"
-  )
   
-  # Display description for area score information
-  valuebox_server("area_about",
-                  value = "Area Score",
-                  subtitle = paste(par_area),
-                  icon = "chart-area",
-                  background = "lightgray",
-                  color = "black"
-  )
+  output$area_about <- renderValueBox(customValueBox(
+    subtitle = paste(par_l_s),
+    value = "Area Score",
+    background = "lightgray",
+    color = "black"
+  ))
   
-  # Display description for engagement score information
-  valuebox_server("engagement_about",
-                  value = "Engagement Score",
-                  subtitle = paste(par_engage),
-                  icon = "graduation-cap",
-                  background = "lightgray",
-                  color = "black"
-  )
+  output$engagement_about <- renderValueBox(customValueBox(
+    subtitle = paste(par_engage),
+    value = "Engagement Score",
+    background = "lightgray",
+    color = "black"
+  ))
+  
+
   
   # BBI descriptions 
   # Display descriptions of scores relating to BBI
   
-  # Display description of mean species per hectare information
-  valuebox_server("MS_about",
-                  subtitle = paste(par_s_h),
-                  value = "Mean Species per hectare",
-                  icon = "graduation-cap",
-                  background = "lightgray",
-                  color = "black"
-  )
+  output$MS_about <- renderValueBox(customValueBox(
+    subtitle = paste(par_m_s),
+    value = "Local species score per hectare",
+    background = "lightgray",
+    color = "black"
+  ))
   
-  # Display description of local species score per hectare information
-  valuebox_server("fife_about",
-                  subtitle = paste(par_area),
-                  value = "Local species score per hectare",
-                  icon = "graduation-cap",
-                  background = "lightgray",
-                  color = "black"
-  )
+  output$fife_about <- renderValueBox(customValueBox(
+    subtitle = paste(par_fife),
+    value = "Local species score per hectare",
+    background = "lightgray",
+    color = "black"
+  ))
   
-  # Display description of Fife species score per hectare information
-  valuebox_server("local_about",
-                  subtitle = paste(par_engage),
-                  value = "Fife species score per hectare",
-                  icon = "graduation-cap",
-                  background = "lightgray",
-                  color = "black"
-  )
+  output$local_about <- renderValueBox(customValueBox(
+    subtitle = paste(par_l_s),
+    value = "Local species score per hectare",
+    background = "lightgray",
+    color = "black"
+  ))
   
   
   # TAB 1: KEY PERFORMANCE INDICES -----------------------------------
@@ -110,31 +100,35 @@ server <- function(input, output, session) {
   # These value boxes display the Species and Habitat Score, Area, and Engagement metrics
   
   # Value box for Species and Habitat Score
-  valuebox_server("S_H",
-                  subtitle = "Species and Habitat Score",
-                  value = "25",
-                  icon = "chart-area",
-                  background = "#49BEB7",
-                  color = "black"
-  )
+  output$S_H <- renderValueBox(customValueBox(
+    subtitle = "Species and Habitat Score",
+    value = "100",
+    icon = icon("area-chart"),
+    background = "#49BEB7",
+    color = "black",
+    height = "auto"
+  ))
   
-  # Value box for Area, with a dynamic value based on user input
-  valuebox_server("area",
-                  value = paste0(25 + input$count, "%"),
-                  subtitle = "Area",
-                  icon = "chart-area",
-                  background = "#FACF59",
-                  color = "black"
-  )
+  # Value box for Area Score
+  output$area <- renderValueBox(customValueBox(
+    value = paste0(25 + input$count, "%"),
+    subtitle = "Area",
+    icon = icon("area-chart"),
+    background = "#FACF59",
+    color = "black",
+    height = "auto"
+  ))
   
-  # Value box for Engagement, with a dynamic value based on user input
-  valuebox_server("engagement",
-                  value = paste0(25 + input$count, "%"),
-                  subtitle = "Engagement",
-                  icon = "graduation-cap",
-                  background = "#FF5959",
-                  color = "black"
-  )
+  # Value box for Engagement Score
+  output$engagement <- renderValueBox(customValueBox(
+    value = paste0(25 + input$count, "%"),
+    subtitle = "Engagement",
+    icon = icon("graduation-cap"),
+    background = "#FF5959",
+    color = "black",
+    height = "auto"
+  ))
+
   
   ## ABI Plot
   # Bar plot showing the number of distinct species for each Taxa
@@ -159,33 +153,36 @@ server <- function(input, output, session) {
   
   ## BBI Valueboxes
   # These value boxes display benchmark scores such as Mean species score/ha, Local species score/ha, and Fife species score/ha
-  
   # Value box for Mean species score per hectare
-  valuebox_server("MS",
-                  value = paste0(25 + input$count, "%"),
-                  subtitle = "Mean species score/ha",
-                  icon = "star",
-                  background = "#FF5959",
-                  color = "black"
-  )
+  output$MS <- renderValueBox(customValueBox(
+    value = paste0(25 + input$count, "%"),
+    subtitle = "Mean species score/ha",
+    icon = icon("star"),
+    background = "#FF5959",
+    color = "black",
+    height = "auto"
+  ))
   
   # Value box for Local species score per hectare
-  valuebox_server("local",
-                  value = paste0(25 + input$count, "%"),
-                  subtitle = "Local species score/ha",
-                  icon = "chart-area",
-                  background = "#FACF59",
-                  color = "black"
-  )
+  output$local <- renderValueBox(customValueBox(
+    value = paste0(25 + input$count, "%"),
+    subtitle = "Local species score/ha",
+    icon = icon("area-chart"),
+    background = "#FACF59",
+    color = "black",
+    height = "auto"
+  ))
   
   # Value box for Fife species score per hectare
-  valuebox_server("fife",
-                  value = paste0(25 + input$count, "%"),
-                  subtitle = "Fife species score/ha",
-                  icon = "graduation-cap",
-                  background = "#49BEB7",
-                  color = "black"
-  )
+  output$fife <- renderValueBox(customValueBox(
+    value = paste0(25 + input$count, "%"),
+    subtitle = "Fife species score/ha",
+    icon = icon("graduation-cap"),
+    background = "#49BEB7",
+    color = "black",
+    height = "auto"
+  ))
+
   
   # TAB 2: TAXA EXPLORER -------------------------------------------------------------------
   
@@ -246,21 +243,23 @@ server <- function(input, output, session) {
     
    
     # Display the value box with the number of distinct species and the determined icon.
-    customValueBox(p(n_distinct(df()$Species),style="font-size:125%;"),
-                   subtitle = p("Species recorded", style= "font-size: 125%;"),
-                   icon = icon_taxa,
+    customValueBox(value = paste(n_distinct(df()$Species)),
+                   subtitle = "Species recorded",
+                   icon = icon(icon_taxa),
                    background = "#A2A8D3",
-                   color = "black"
+                   color = "black",
+                   height = "auto"
     )
   })
   
   # Render a value box showing the total number of records for the selected taxa.
   output$num_records_taxa <- renderValueBox({
-    customValueBox(p(nrow(df()),style="font-size:125%;"),
-                   subtitle = p("Records collected", style= "font-size: 125%;"),
-                   icon = "clipboard",
+    customValueBox(value = nrow(df()),
+                   subtitle = "Records collected",
+                   icon = icon("clipboard"),
                    background = "#A2A8D3",
-                   color = "black"
+                   color = "black",
+                   height = "auto"
     )
   })
   
@@ -273,11 +272,12 @@ server <- function(input, output, session) {
       summarise(Num_Records = n()) %>%
       arrange(desc(Num_Records))
     
-    customValueBox(p(observer_list$Observer[1],style="font-size:125%;"),
-                 subtitle = p(paste("is the top observer with",observer_list$Num_Records[1],"records!"),style="font-size:125%;"),
-                   icon = "trophy",
+    customValueBox(observer_list$Observer[1],
+                 subtitle = paste("is the top observer with",observer_list$Num_Records[1],"records!"),
+                   icon = icon("trophy"),
                    background = "#A2A8D3",
-                   color = "black"
+                   color = "black",
+                 height = "auto"
     )
   })
   
@@ -426,9 +426,10 @@ server <- function(input, output, session) {
   output$num_records <- renderValueBox({
     customValueBox(sum_stud_df()$records,
                    subtitle = "Records collected",
-                   icon = "clipboard",
+                   icon = icon("clipboard"),
                    background = "#FF5959",
-                   color = "black"
+                   color = "black",
+                   height = "auto"
     )
   })
   
@@ -436,9 +437,10 @@ server <- function(input, output, session) {
   output$num_days <- renderValueBox({
     customValueBox(sum_stud_df()$days,
                    subtitle = "Days surveyed",
-                   icon = "calendar",
+                   icon = icon("calendar"),
                    background = "#FACF59",
-                   color = "black"
+                   color = "black",
+                   height = "auto"
     )
   })
   
@@ -447,9 +449,10 @@ server <- function(input, output, session) {
     customValueBox(
       value = sum_stud_df()$top_taxa,
       subtitle = "Top Taxa",
-      icon =  "graduation-cap",
+      icon =  icon("graduation-cap"),
       background = "#49BEB7",
-      color = "black"
+      color = "black",
+      height = "auto"
     )
   })
   

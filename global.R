@@ -68,16 +68,19 @@ years <- names(all_years_list)
 
 # TAB 0: ABOUT -------------------------------------------------------------------------------------------
 
+# ABI score descriptions
+par_s_h <- "Description of species and habitat score."
 
-# score descriptions
-par_s_h <- "‘Real’ KPI score for every year, scaled to 100 as the benchmark established in the first year. There are three separate measures: a species and habitat richness score,
-an area managed for biodiversity score and a biodiversity engagement score. "
+par_area <- "Description of area managed for biodiversity score"
 
-par_area <- "‘Real’ KPI score for every year, scaled to 100 as the benchmark established in the first year. There are three separate measures: a species and habitat richness score,
-an area managed for biodiversity score and a biodiversity engagement score. "
+par_engage <- "Description of biodiversity engagement score."
 
-par_engage <- "‘Real’ KPI score for every year, scaled to 100 as the benchmark established in the first year. There are three separate measures: a species and habitat richness score,
-an area managed for biodiversity score and a biodiversity engagement score. "
+# BBI score descriptions
+par_m_s <- "Description of mean species richness per hectare."
+
+par_l_s <- "Description of local species richness per hectare."
+
+par_fife <- "Description of Fife species richness per hectare."
 
 # TAXA Explorer about
 
@@ -86,7 +89,7 @@ First, select your taxa and you'll see a bar chart showing the number of records
 Below the graph is a table of the records, where you can see the date the record was made and who the observer was. Additionally, if you select a row
 with a photo identification number, a photo taken by the observer of the record will be displayed."
 
-# Data Table Options ----------------------------------------------------------------------------------------------------
+# Data Table Options --------------------------------------------------------------------------------------
 
 # table options 
 # scrollX = "100px": Enables horizontal scrolling and sets the width of the scrollable area to 100 pixels.
@@ -121,7 +124,7 @@ table_options <- function() {
 
 # to republish app, run code below or use button next to Run App
 # insert path to app directory 
-# rsconnect::deployApp("/Users/anecloete/Desktop/BMP_Dashboard2",forceUpdate = T)
+# rsconnect::deployApp("/Users/anecloete/Desktop/BMP_Dashboard",forceUpdate = T)
  
 
 

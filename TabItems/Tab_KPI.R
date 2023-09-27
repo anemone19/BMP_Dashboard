@@ -4,15 +4,15 @@ Tab1 <- tabItem(
   h3("Annual Biodiversity Index"),
   fluidRow(
     # valueBoxOutput("S_H"),
-    valuebox_ui("S_H"),
-    valuebox_ui("area"),
-    valuebox_ui("engagement")
+    valueBoxOutput("S_H"),
+    valueBoxOutput("area"),
+    valueBoxOutput("engagement")
   ),
   h3("Benchmark Biodiversity Index"),
   fluidRow(
-    valuebox_ui("MS"),
-    valuebox_ui("local"),
-    valuebox_ui("fife")
+    valueBoxOutput("MS"),
+    valueBoxOutput("local"),
+    valueBoxOutput("fife")
   ),
   h3("Change Biodiversity Index"),
   fluidRow(),

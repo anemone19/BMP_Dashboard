@@ -1,6 +1,5 @@
 /* Body */
 
-
 .content-wrapper,
 .right-side {
   overflow: auto;
@@ -11,3 +10,6 @@ table.dataTable tbody tr.selected {
   pointer-events: none
 }
 
+h4 {
+	font-weight: bold;
+}
