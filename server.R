@@ -43,6 +43,24 @@ server <- function(input, output, session) {
   
   # TAB 0: ABOUT ----------------------------------------------------------------------
   
+  # gorup photos 
+  
+  output$groupPhoto1 <- renderImage({
+    list(src = "www/Team_Data/group_photo.jpeg",
+         alt = "Image description",
+         width = "50px", # Set the width as needed
+         height = "50px" # Maintain the aspect ratio
+    )
+  }, deleteFile = FALSE)
+  
+  output$groupPhoto2 <- renderImage({
+    list(src = "www/Team_Data/group_photo2.jpeg",
+         alt = "Image description",
+         width = "100%", # Set the width as needed
+         height = "auto" # Maintain the aspect ratio
+    )
+  }, deleteFile = FALSE)
+  
   # ABI descriptions
   # Value boxes for displaying the descriptions of the three KPIs
   output$S_H_about <- renderValueBox(customValueBox(
@@ -375,7 +393,7 @@ server <- function(input, output, session) {
     
   })
   
-?addCircles
+
   # TAB 3: STUDENT ENGAGEMENT  ---------------------------------------------------
   
   # Heading for the student engagement section
@@ -520,9 +538,16 @@ server <- function(input, output, session) {
     filename <- paste0("www/Survey_Photos/", input$filename, ".jpg")
     
     if (file.exists(filename)) {
-      output$imageOutput <- renderImage({
-        list(src = filename, width = "100%")
-      }, deleteFile = FALSE)
+      
+      showModal(modalDialog(
+        title = "Record Photo",
+        output$imageOutput <- renderImage({
+          list(src = filename, width = "100%", height = "100%")
+        }, deleteFile = FALSE),
+        easyClose = TRUE
+      ))
+      
+
     } else {
       showModal(
         modalDialog(
@@ -534,4 +559,5 @@ server <- function(input, output, session) {
   })
 
 }
+
 

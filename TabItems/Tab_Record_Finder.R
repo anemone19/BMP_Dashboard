@@ -1,49 +1,48 @@
 # TAB 4: Record finder  ----------------------------------------------------------------------------
 
+# read in all photo files within Survey_Photos in OneDrive Folder
+all_Sphotos <- list.files(
+  path = paste0("www/Survey_Photos"),
+  recursive = TRUE,
+  pattern = "\\.jpg$",
+  full.names = FALSE
+)
+
+
+random_photos <- sample(all_Sphotos, size = 10)
+
 Tab4 <- tabItem(
   tabName = "record_finder",
-  textInput("filename", "Enter PhotoID (without extension):"),
-  actionButton("viewButton", "View Image"),
-  fluidRow(
-    box(
-      imageOutput("imageOutput", width="auto",height="auto")
+  tags$div(
+    class = "landing-wrapper-record",
+    # child element 1: images
+    tags$ul(
+      class = "image-gallery",
+      tags$li(img(src = paste(random_photos[1]))),
+      tags$li(img(src = paste(random_photos[2]))),
+      tags$li(img(src = paste(random_photos[3]))),
+      tags$li(img(src = paste(random_photos[4]))),
+      tags$li(img(src = paste(random_photos[5]))),
+      tags$li(img(src = paste(random_photos[6]))),
+      tags$li(img(src = paste(random_photos[7]))),
+      tags$li(img(src = paste(random_photos[8]))),
+      tags$li(img(src = paste(random_photos[9]))),
+      tags$li(img(src = paste(random_photos[10])))
+    ),
+
+    # child element 2: content
+    tags$div(
+      class = "landing-block foreground-content",
+      tags$div(
+        class = "foreground-text",
+        align = "center",
+        textInput("filename", "Enter PhotoID (without extension):"),
+        actionButton("viewButton", "View Image"),
+        br(),
+        # imageOutput("imageOutput", width = "100%", height = "auto")
+      )
     )
   )
 )
 
-# Tab4 <- tabItem(
-#   tabName = "record_finder",
-#   tags$div(class="landing-wrapper",
-#            
-#            # child element 1: images
-#            tags$div(class="landing-block background-content",
-#                     
-#                     # top left
-#                     img(src="Survey_Photos/MeganCommonSnowberry.jpg"),
-#                     
-#                     # top right
-#                     img(src="Survey_Photos/TomMoth310523CLute.jpg"),
-#                     
-#                     # bottom left
-#                     img(src="Survey_Photos/Erica Bibio Marci.jpg"), 
-#                     
-#                     # bottom right
-#                     
-#                     img(src="Survey_Photos/Tombird140423mallard.jpg")
-#                     
-#            ),
-#            
-#            # child element 2: content
-#            tags$div(class="landing-block foreground-content",
-#                     tags$div(class="foreground-text",
-#                              tags$h1("Welcome"),
-#                              tags$p("This shiny app demonstrates
-#                                                      how to create a 2 x 2 layout
-#                                                               using css grid and
-#                                                               overlaying content."),
-#                              tags$p("Isn't this cool?"),
-#                              tags$p("Yes it is!")
-#                     )
-#            )
-#   )
-# )
+# SHCPiedWagtail.jpg

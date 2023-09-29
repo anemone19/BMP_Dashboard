@@ -9,6 +9,7 @@ library(shinyBS)
 library(shinyjs)
 library(DT)
 library(fresh)
+library(imola)
 
 # plotting and data prep packages
 library(ggplot2)

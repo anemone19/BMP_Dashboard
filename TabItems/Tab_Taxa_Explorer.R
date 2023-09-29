@@ -1,33 +1,6 @@
 
 # TAB: TAXA EXPLORER ----------------------------------------------------------------------------
 
-# Tab2 <- tabItem(
-#   tabName = "taxa_expl",
-#   tags$h3(
-#     style = "display: flex; align-items: center;",
-#     textOutput("taxa_heading")
-#   ),
-#   fluidRow(
-#     # box(height=500,width=12,
-#     #   div(style='width: fit-content; margin-left: auto; margin-right: auto;overflow-x: scroll;overflow-y: scroll;',
-#     #         plotlyOutput("species_bar")))
-#     box(title = "Top 50", collapsible = TRUE,height=500,width=12,
-#       plotlyOutput("species_bar",inline=F, width= "100%")
-#     )
-#   ),
-#   fluidRow(
-#     box(collapsible = TRUE,
-#         title = "Records",
-#         DTOutput("taxa_table"), width=12)
-#   ),
-#   fluidRow(
-#     box(collapsible = TRUE,
-#         title = "Species List",
-#         DTOutput("species_list"), width=12)
-#   )
-# )
-
-
 Tab2 <- tabItem(
   tabName = "taxa_expl",
     h3(textOutput("taxa_heading"), align = "center"),
