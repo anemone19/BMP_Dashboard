@@ -62,10 +62,10 @@ sidebar <- dashboardSidebar(
   )
 )
 
-
 # 3. BODY ---------------------------------------------------------------------------------------------------
 
 body <- dashboardBody(
+  useShinyjs(),
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
   ),

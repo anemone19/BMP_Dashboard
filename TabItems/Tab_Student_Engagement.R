@@ -9,9 +9,6 @@ Tab3 <- tabItem(
   fluidRow(column(textOutput("student_description"),width=12)),
   br(),
   fluidRow(
-    # valuebox_ui("num_records"),
-    # valuebox_ui("num_days"),
-    # valuebox_ui("top_taxa")
     valueBoxOutput("num_records"),
     valueBoxOutput("num_days"),
     valueBoxOutput("top_taxa")
@@ -22,6 +19,11 @@ Tab3 <- tabItem(
     )
   ),
   fluidRow(
-    box(DTOutput("student_table"), width=12)
-  )
+    tabBox(
+      id = "box2",height=500,width=12,
+      tabPanel("Species List", DTOutput("species_list_student")),
+      tabPanel("Records", DTOutput("student_table"))
+    )
+  ),
+  uiOutput("Modal_student")
 )

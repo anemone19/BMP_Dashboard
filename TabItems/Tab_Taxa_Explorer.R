@@ -3,7 +3,7 @@
 
 Tab2 <- tabItem(
   tabName = "taxa_expl",
-    h3(textOutput("taxa_heading"), align = "center"),
+    # h3(textOutput("taxa_heading"), align = "center"),
   br(),
     tabBox(
       id = "box1",height=500,width=12,
@@ -39,5 +39,6 @@ Tab2 <- tabItem(
       id = "box2",height=500,width=12,
       tabPanel("Species List", DTOutput("species_list")),
       tabPanel("Records", DTOutput("taxa_table"))
-    )
+    ),
+  uiOutput("Modal_taxa")
 )

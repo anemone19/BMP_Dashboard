@@ -36,10 +36,14 @@ Tab4 <- tabItem(
       tags$div(
         class = "foreground-text",
         align = "center",
-        textInput("filename", "Enter PhotoID (without extension):"),
-        actionButton("viewButton", "View Image"),
+        textInput("PhotoID", "Enter PhotoID (with extension):"),
+        actionButton("viewButton", "View Image", style = "display: 
+                       block; background-color: #619e62; color: #ffffff; 
+                       border: none; border-radius: 5px; cursor: pointer;
+                       font-size; 16px; margin: auto"),
         br(),
-        # imageOutput("imageOutput", width = "100%", height = "auto")
+        br(),
+        uiOutput("imageOutput"),
       )
     )
   )

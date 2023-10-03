@@ -127,6 +127,6 @@ table_options <- function() {
 # insert path to app directory 
 # rsconnect::deployApp("/Users/anecloete/Desktop/BMP_Dashboard",forceUpdate = T)
  
-
+# opacity foreground content about page 
 
 

@@ -1,42 +1,89 @@
-/* Body */
+/* Body Styles */
 
+/* Header Logo Styles */
+.skin-blue .main-header .logo {
+    background-color: #3A6B34;
+    #2E5728
+    #A8A158
+    #BF9230
+    #4D7D47
+    #DCE5BF
+    #F3D986
+    #808080
+    #FFF8E1
+}
+
+
+/* Header Navbar Styles */
+.skin-blue .main-header .navbar {
+    background-color: #3A6B34;
+}
+
+/* Sidebar Styles */
+.skin-blue .main-sidebar {
+    background-color: #CBD18F;
+}
+
+/* Sidebar Menu Hover Effect Styles */
+.skin-blue .main-sidebar .sidebar-menu>li:hover>a,
+.skin-blue .main-sidebar .sidebar-menu>li.active>a {
+    background-color: #dbdfb1 !important;
+    color: #fff;
+    border-left-color: #fff;
+}
+
+/* Sidebar Text Color Styles */
+.skin-blue .main-sidebar .sidebar-menu>li>a {
+    color: white !important;
+}
+
+/* TabBox Colour Styles */
+.nav-tabs-custom .nav-tabs li.active {
+    border-top-color: #CBD18F;
+}
+
+/* Content Wrapper Styles */
 .content-wrapper,
 .right-side {
-  overflow: auto;
-  max-height: 100vh;
+    overflow: auto;
+    max-height: 100vh;
 }
 
+/* DataTable Styles */
 table.dataTable tbody tr.selected {
-  pointer-events: none
+    pointer-events: none;
 }
 
+/* Heading Styles */
 h4 {
-	font-weight: bold;
+    font-weight: bold;
 }
 
-html,body{
+/* HTML and Body Styles */
+html, body {
     margin: 0;
     height: 100%;
     padding: 0;
     margin: 0;
 }
 
+/* Layout Styles for About page */
 
-/* layout css */
+/* Landing Wrapper Styles */
 .landing-wrapper {}
 
-.landing-wrapper .landing-block{
+.landing-wrapper .landing-block {
     width: 100%;
 }
 
-.landing-wrapper .background-content{
+.landing-wrapper .background-content {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-row-gap: 0.25%;
     grid-column-gap: 0.25%;
 }
 
-.landing-wrapper .background-content img{
+.landing-wrapper .background-content img {
     display: block;
     width: 100%;
     height: 100%;
@@ -44,15 +91,15 @@ html,body{
     border-radius: 5px;
 }
 
-.landing-wrapper .foreground-content{
+.landing-wrapper .foreground-content {
     position: fixed;
     top: 40%;
-    z-index: 9999;
+    z-index: 9000;
     display: flex;
     left: 33%;
 }
 
-.landing-wrapper .foreground-content .foreground-text{
+.landing-wrapper .foreground-content .foreground-text {
     width: 50%;
     padding: 2.5%;
     color: black;
@@ -61,63 +108,58 @@ html,body{
     border-radius: 5px;
 }
 
+/* Layout Record Finder Styles */
 
-/* layout RECORD FINDER css */
-.landing-wrapper {}
+/* Landing Wrapper Record Styles */
+.landing-wrapper-record {}
 
-.landing-wrapper-record .landing-block{
+.landing-wrapper-record .landing-block {
     width: 100%;
 }
 
 .landing-wrapper-record .image-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .landing-wrapper-record .image-gallery ul {
-  margin:0;
-  padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 .landing-wrapper-record .image-gallery li {
-  flex: 1 1 auto; 
-  height: 300px;
-  list-style-type: none;
-  position: relative;
-  margin:0;
-  padding:0;
+    flex: 1 1 auto;
+    height: 300px;
+    list-style-type: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 .landing-wrapper-record .image-gallery li img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
-  border-radius: 5px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    border-radius: 5px;
 }
 
-.landing-wrapper-record .foreground-content{
+.landing-wrapper-record .foreground-content {
     position: fixed;
-    top: 20%;
+    top: 15%;
     z-index: 9998;
     display: flex;
-    left: 36%;
+    left: 46%;
     overflow: auto;
 }
 
-.landing-wrapper-record .foreground-content .foreground-text{
-    width: 50%;
+.landing-wrapper-record .foreground-content .foreground-text {
+    width: 25%;
     padding: 2.5%;
     color: black;
     background-color: white;
     border-radius: 5px;
-}
-
-.modal {
-    z-index: 9999;
-    top: 20%;
-    left: 20%;
 }
 
 
