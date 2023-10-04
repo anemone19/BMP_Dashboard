@@ -26,11 +26,11 @@ library(cronR) # automated script running package
 
 # pathname to Biodiversity Survey Master - CHANGE IF NOT ANE hehe
 
-path_to_master <- "/Users/anecloete/Library/CloudStorage/OneDrive-UniversityofStAndrews/Biodiversity KPI mapping Master/Biodiversity Survey Master"
+path_to_master <- "/Users/anecloete/Library/CloudStorage/OneDrive-UniversityofStAndrews/Biodiversity KPI mapping Master"
 
 # Obtain all geopackage files from the specified directory
 all_gpkgs <- list.files(
-  path = paste(path_to_master),
+  path = paste0(path_to_master,"/Biodiversity Survey Master"),
   recursive = TRUE,
   pattern = "\\.gpkg$",
   full.names = TRUE
@@ -49,7 +49,7 @@ all_gpkgs <- all_gpkgs[!grepl(pattern, all_gpkgs)]
 # taxa_dat <- taxa_dat[!sapply(names(taxa_dat), function(x) any(sapply(excluded_keywords, grepl, x = x)))]
 
 # Exclude specific problematic geopackage
-problematic_gpkg <- paste0(path_to_master,"/Erica/Erica Backup/Ericabutterflies.gpkg")
+problematic_gpkg <- paste0(path_to_master,"/Biodiversity Survey Master/Erica/Erica Backup/Ericabutterflies.gpkg")
 all_gpkgs <- all_gpkgs[all_gpkgs != problematic_gpkg]
 
 # Read all geopackages into a list
@@ -122,8 +122,6 @@ taxa_comb <- bind_rows(taxa_dat)
 # Clean and transform taxa data for further analysis
 taxa_clean <- taxa_comb %>%
   drop_na(taxa) %>%
-  as.character(df$Date) %>% 
-  separate(Date, into = c("date", "time"), sep = " (?=[^ ]+$)") %>%
   mutate(
     date = ymd(gsub("/", "-", date)),
     year = year(date),
@@ -131,6 +129,7 @@ taxa_clean <- taxa_comb %>%
     day = day(date)
   ) %>% 
   filter(!(taxa == "hoverfly" & Observer == "Erica")) %>% # remove Erica hoverfly entries 
+  filter(!(Observer == "Will")) %>% # remove Will entries %>%
   unite(collapsed_species, specieslatin:seaweedlatin, sep = ",", na.rm = TRUE) %>%
   mutate_at(vars(Species, collapsed_species), na_if, "") %>%
   mutate(
@@ -162,7 +161,8 @@ taxa_clean <- taxa_comb %>%
                   "2023" = "2022/2023",
                   "2022" = "2022/2023"),
     Observer = recode(Observer,
-                      Other1 = "Cori")) %>%
+                      Other1 = "Cori",
+                      Other5 = "Sam")) %>%
   select(Species, SpeciesSci, Count, date, Observer, taxa, photoid, geometry, year, day) %>%
   rename(
     Date = date,

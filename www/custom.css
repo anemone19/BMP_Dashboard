@@ -3,25 +3,26 @@
 /* Header Logo Styles */
 .skin-blue .main-header .logo {
     background-color: #3A6B34;
-    #2E5728
-    #A8A158
-    #BF9230
-    #4D7D47
-    #DCE5BF
-    #F3D986
-    #808080
-    #FFF8E1
 }
 
+.skin-blue .main-header .logo:hover {
+  background-color: #3A6B34;
+}
 
 /* Header Navbar Styles */
 .skin-blue .main-header .navbar {
     background-color: #3A6B34;
 }
 
+
 /* Sidebar Styles */
 .skin-blue .main-sidebar {
     background-color: #CBD18F;
+}
+
+/* Change color of the sidebar toggle */
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+  background-color: #3A6B34; /* Change to the desired color for sidebar toggle hover */
 }
 
 /* Sidebar Menu Hover Effect Styles */

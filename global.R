@@ -125,8 +125,7 @@ table_options <- function() {
 
 # to republish app, run code below or use button next to Run App
 # insert path to app directory 
-# rsconnect::deployApp("/Users/anecloete/Desktop/BMP_Dashboard",forceUpdate = T)
+# NB: COMMENT OUT CODE WHEN RUNNING LOCALLY 
+rsconnect::deployApp("/Users/anecloete/Desktop/BMP_Dashboard",forceUpdate = T)
  
-# opacity foreground content about page 
-
 

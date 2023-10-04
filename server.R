@@ -9,10 +9,9 @@
 
 library(shiny)
 
-
 server <- function(input, output, session) {
+  
   # Fetch data for selected time, e.g.  2022/2023 or 2023/2024
-
   # Reactively subset data based on user input
   survey_data <- reactive({
     extract_df <- all_years_list[[input$year]]
@@ -33,13 +32,19 @@ server <- function(input, output, session) {
       pull(Observer)
   })
 
+  # Reactively update taxa names for Student Engagement dropdown 
   observeEvent(input$year,
     {
-      updateSelectInput(session, "taxa_select", choices = taxa_names(), selected = "Butterflies")
+      if (input$year == "2022/2023") {
+        updateSelectInput(session, "taxa_select", choices = taxa_names(), selected = "Butterflies") # I want the taxa explorer to open on butterflies as default
+      } else {
+        updateSelectInput(session, "taxa_select", choices = taxa_names())
+      }
     },
     ignoreNULL = FALSE
   )
 
+  # Reactively update student names for Student Engagement dropdown 
   observeEvent(input$year,
     {
       updateSelectInput(session, "student_select", choices = student_names())
@@ -49,8 +54,7 @@ server <- function(input, output, session) {
 
   # TAB 0: ABOUT ----------------------------------------------------------------------
 
-  # gorup photos
-
+  # group photos
   output$groupPhoto1 <- renderImage(
     {
       list(
@@ -77,53 +81,64 @@ server <- function(input, output, session) {
 
   # ABI descriptions
   # Value boxes for displaying the descriptions of the three KPIs
-  output$S_H_about <- renderValueBox(customValueBox(
+  
+  output$S_H_about <- valuebox_server(
+    id = "S_H_about",
     subtitle = paste(par_s_h),
     value = "Species and Habitat Score",
     background = "lightgray",
-    color = "black"
-  ))
-
-
-  output$area_about <- renderValueBox(customValueBox(
+    color = "black",
+    icon = NULL
+  ) 
+  
+  output$area_about <- valuebox_server(
+    id = "area_about",
     subtitle = paste(par_l_s),
     value = "Area Score",
     background = "lightgray",
-    color = "black"
-  ))
-
-  output$engagement_about <- renderValueBox(customValueBox(
+    color = "black",
+    icon = NULL
+  ) 
+  
+  output$engagement_about <- valuebox_server(
+    id = "engagement_about",
     subtitle = paste(par_engage),
     value = "Engagement Score",
     background = "lightgray",
-    color = "black"
-  ))
-
+    color = "black",
+    icon = NULL
+  ) 
 
 
   # BBI descriptions
   # Display descriptions of scores relating to BBI
 
-  output$MS_about <- renderValueBox(customValueBox(
+  output$MS_about <- valuebox_server(
+    id = "MS_about",
     subtitle = paste(par_m_s),
     value = "Local species score per hectare",
     background = "lightgray",
-    color = "black"
-  ))
+    color = "black",
+    icon = NULL
+  )
 
-  output$fife_about <- renderValueBox(customValueBox(
+  output$fife_about <- valuebox_server(
+    id = "fife_about",
     subtitle = paste(par_fife),
     value = "Local species score per hectare",
     background = "lightgray",
-    color = "black"
-  ))
+    color = "black",
+    icon = NULL
+  )
 
-  output$local_about <- renderValueBox(customValueBox(
+  output$local_about <- valuebox_server(
+    id = "local_about",
+    icon = NULL,
     subtitle = paste(par_l_s),
     value = "Local species score per hectare",
     background = "lightgray",
     color = "black"
-  ))
+  )
 
 
   # TAB 1: KEY PERFORMANCE INDICES -----------------------------------
@@ -132,34 +147,37 @@ server <- function(input, output, session) {
   # These value boxes display the Species and Habitat Score, Area, and Engagement metrics
 
   # Value box for Species and Habitat Score
-  output$S_H <- renderValueBox(customValueBox(
+  output$S_H <- valuebox_server(
+    id ="S_H",
     subtitle = "Species and Habitat Score",
     value = "100",
-    icon = icon("area-chart"),
+    icon = icon("star", style = "font-size: 50px"),
     background = "#068D9D",
     color = "black",
     height = "auto"
-  ))
+  )
 
   # Value box for Area Score
-  output$area <- renderValueBox(customValueBox(
-    value = paste0(25 + input$count, "%"),
-    subtitle = "Area",
-    icon = icon("area-chart"),
+  output$area <- valuebox_server(
+    id ="area",
+    value = "##",
+    subtitle = "Area Score",
+    icon = icon("area-chart", style = "font-size: 50px"),
     background = "#226891",
     color = "black",
     height = "auto"
-  ))
+  )
 
   # Value box for Engagement Score
-  output$engagement <- renderValueBox(customValueBox(
-    value = paste0(25 + input$count, "%"),
-    subtitle = "Engagement",
-    icon = icon("graduation-cap"),
+  output$engagement <- valuebox_server(
+    id = "engagement",
+    value = "##",
+    subtitle = "Engagement Score",
+    icon = icon("graduation-cap", style = "font-size: 50px"),
     background = "#D9DBF1",
     color = "black",
-    height = "auto"
-  ))
+    height = "a"
+  )
 
 
   ## ABI Plot
@@ -171,7 +189,7 @@ server <- function(input, output, session) {
 
     ggplotly(
       ggplot(df, aes(x = reorder(Taxa, -Count), y = Count)) +
-        geom_bar(stat = "identity", fill = "lightblue", width = 0.2) +
+        geom_bar(stat = "identity", fill = "#028E9D", width = 0.2) +
         labs(
           x = "\nTaxa",
           y = "Number of Species\n"
@@ -188,36 +206,58 @@ server <- function(input, output, session) {
   ## BBI Valueboxes
   # These value boxes display benchmark scores such as Mean species score/ha, Local species score/ha, and Fife species score/ha
   # Value box for Mean species score per hectare
-  output$MS <- renderValueBox(customValueBox(
-    value = paste0(25 + input$count, "%"),
+  output$MS <- valuebox_server(
+    id = "MS",
+    value = "##",
     subtitle = "Mean species score/ha",
-    icon = icon("star"),
+    icon = icon("calculator", style = "font-size: 50px"),
     background = "#068D9D",
     color = "black",
     height = "auto"
-  ))
+  )
 
   # Value box for Local species score per hectare
-  output$local <- renderValueBox(customValueBox(
-    value = paste0(25 + input$count, "%"),
+  output$local <- valuebox_server(
+    id ="local",
+    value = "##",
     subtitle = "Local species score/ha",
-    icon = icon("area-chart"),
+    icon = icon("location-dot", style = "font-size: 50px"),
     background = "#226891",
     color = "black",
     height = "auto"
-  ))
+  )
 
   # Value box for Fife species score per hectare
-  output$fife <- renderValueBox(customValueBox(
-    value = paste0(25 + input$count, "%"),
+  output$fife <- valuebox_server(
+    id = "fife",
+    value = "##",
     subtitle = "Fife species score/ha",
-    icon = icon("graduation-cap"),
+    icon = icon("map", style = "font-size: 50px"),
     background = "#D9DBF1",
     color = "black",
     height = "auto"
-  ))
+  )
 
+  # EXAMPLE PLOT FOR CHANGE, ONLY SHOWN WHEN NOT FIRST YEAR
 
+  output$example_plot <- output$species_bar <- renderPlotly({
+    example_df <- data.frame(
+      Year = c("2022/2023", "2023/2024"),
+      CBI = c(100, 89)
+    )
+
+    ggplotly(
+      ggplot(example_df, aes(x = Year, y = CBI)) +
+        geom_point(stat = "identity", colour = "#068D9D", size = 3) +
+        labs(
+          x = "\nYear",
+          y = "CBI\n"
+        ) +
+        theme_light() +
+        theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 1, hjust = 1)),
+      tooltip = c("y")
+    )
+  })
   # TAB 2: TAXA EXPLORER -------------------------------------------------------------------
 
   # Render and display the selected taxa name followed by " Explorer" as a heading in the UI.
@@ -243,7 +283,7 @@ server <- function(input, output, session) {
       summarise(Value = n()) %>%
       mutate(Percent = Value / sum(Value)) %>%
       arrange(desc(Value)) %>%
-      slice_max(n = 10, order_by = Value)
+      slice(1:10)
 
     # Convert Species to a factor for plotting.
     pie$Species <- factor(pie$Species, levels = (as.character(pie$Species)))
@@ -264,7 +304,7 @@ server <- function(input, output, session) {
         size = 4, nudge_x = 0.7, show.legend = FALSE, colour = "black"
       ) +
       scale_fill_brewer(palette = "Set3")
-      # scale_colour_gradientn(colours = rainbow(10))
+    # scale_colour_gradientn(colours = rainbow(10))
   })
 
   # Render a value box showing the number of distinct species for the selected taxa.
@@ -277,12 +317,11 @@ server <- function(input, output, session) {
     # Look up the icon for the selected taxa
     icon_taxa <- ifelse(!is.na(icon_map[input$taxa_select]), icon_map[input$taxa_select], "leaf")
 
-
     # Display the value box with the number of distinct species and the determined icon.
     customValueBox(
       value = paste(n_distinct(df()$Species)),
       subtitle = "Species recorded",
-      icon = icon(icon_taxa),
+      icon = icon(icon_taxa, style = "font-size: 50px"),
       background = "#D9DBF1",
       color = "black",
       height = "auto"
@@ -290,11 +329,10 @@ server <- function(input, output, session) {
   })
 
   # Render a value box showing the total number of records for the selected taxa.
-  output$num_records_taxa <- renderValueBox({
-    customValueBox(
+  output$num_records_taxa <- renderValueBox({customValueBox(
       value = nrow(df()),
       subtitle = "Records collected",
-      icon = icon("clipboard"),
+      icon = icon("clipboard", style = "font-size: 50px"),
       background = "#D9DBF1",
       color = "black",
       height = "auto"
@@ -311,7 +349,7 @@ server <- function(input, output, session) {
 
     customValueBox(observer_list$Observer[1],
       subtitle = paste("is the top observer with", observer_list$Num_Records[1], "records!"),
-      icon = icon("trophy"),
+      icon = icon("trophy", style = "font-size: 50px"),
       background = "#D9DBF1",
       color = "black",
       height = "auto"
@@ -356,16 +394,14 @@ server <- function(input, output, session) {
   observeEvent(input$taxa_table_rows_selected, {
     selected_row <- input$taxa_table_rows_selected
     selected_photo <- df()[selected_row, ]$PhotoID
-    
+
     if (!is.na(selected_photo)) {
       shinyjs::enable("customModal")
       shinyjs::runjs('$("#customModal").show();')
-      shinyjs::runjs(paste('$("#modalImage_taxa").attr("src",','"',selected_photo,'");', sep = ''))
-      
+      shinyjs::runjs(paste('$("#modalImage_taxa").attr("src",', '"', selected_photo, '");', sep = ""))
     }
-    
   })
-  
+
   # Generate UI dynamically in the server
   output$Modal_taxa <- renderUI({
     fluidPage(
@@ -375,10 +411,10 @@ server <- function(input, output, session) {
         style = "display: none;",
         div(
           id = "modalContent",
-          style = "position: fixed; 
+          style = "position: fixed;
           top: 50%;
-          left: 50%; transform: translate(-50%, -50%); 
-          background-color: white; 
+          left: 50%; transform: translate(-50%, -50%);
+          background-color: white;
           padding: 5px 10px 5px 10px;
           box-shadow: 0px 0px 5000px rgba(0, 0, 0, 0.5);
           border-radius: 5px;
@@ -386,21 +422,21 @@ server <- function(input, output, session) {
           h4("Record Photo"),
           img(id = "modalImage_taxa", style = "display: block; max-width: auto; max-height: 50vh; margin: auto"),
           br(),
-          actionButton("closeModalBtn_taxa", "Close Modal", style = "display: 
-                       block; background-color: #619e62; color: #ffffff; 
+          actionButton("closeModalBtn_taxa", "Close Modal", style = "display:
+                       block; background-color: #619e62; color: #ffffff;
                        border: none; border-radius: 5px; cursor: pointer;
                        font-size; 16px; margin: auto")
         )
       )
     )
   })
-  
+
 
   # Hide the modal when the close button is clicked
   observeEvent(input$closeModalBtn_taxa, {
     shinyjs::runjs('$("#customModal").hide();')
   })
-  
+
 
   # Species list datatable
   # This data table lists species and their respective number of records, sorted in descending order
@@ -457,18 +493,29 @@ server <- function(input, output, session) {
     search_word <- input$student_select
     search_paragraph <- grep(search_word, student_text_sep)[1]
     description <- student_text_sep[search_paragraph]
-    description
+
+    # if student has not given description, return blank
+    if (is.na(description)) {
+      description <- ""
+    } else {
+      description
+    }
   })
 
   # Display photo of the selected student
   # This dynamically fetches the photo based on the selected student's name
   output$photoOutput <- renderUI({
     name <- input$student_select
-    image_path <- paste0("Team_Data/", name, ".jpg")
-    div <- tags$div(
-      tags$img(src = image_path, height = "100px", style = "margin-right: 10px; border-radius: 30px;")
-    )
-    div
+    if (file.exists(paste0("www/Team_Data/", name, ".jpg"))) {
+      photo <- tags$div(
+        tags$img(src = paste0("Team_Data/", name, ".jpg"), height = "100px", style = "margin-right: 10px; border-radius: 30px;")
+      )
+    } else {
+      photo <- tags$div(
+        icon("user-secret", style = "margin-right: 10px;font-size: 50px")
+      )
+    }
+    photo
   })
 
   # Reactive dataframe to filter the main dataset by the selected student
@@ -547,7 +594,7 @@ server <- function(input, output, session) {
 
     ggplotly(
       ggplot(df, aes(x = reorder(Taxa, -Count), y = Count)) +
-        geom_bar(stat = "identity", fill = "lightblue", width = 0.2) +
+        geom_bar(stat = "identity", fill = "#028E9D", width = 0.2) +
         labs(
           x = "\nTaxa",
           y = " Number of Records\n"
@@ -574,21 +621,19 @@ server <- function(input, output, session) {
   observeEvent(input$student_table_rows_selected, {
     selected_row <- input$student_table_rows_selected
     selected_photo <- stud_df()[selected_row, ]$PhotoID
-    
+
     if (!is.na(selected_photo)) {
       shinyjs::enable("customModal")
       shinyjs::runjs('$("#customModal").show();')
-      shinyjs::runjs(paste('$("#modalImage_student").attr("src",','"',selected_photo,'");', sep = ''))
-      
+      shinyjs::runjs(paste('$("#modalImage_student").attr("src",', '"', selected_photo, '");', sep = ""))
     }
-    
   })
-  
+
   # Hide the modal when the close button is clicked
   observeEvent(input$closeModalBtn_student, {
     shinyjs::runjs('$("#customModal").hide();')
   })
-  
+
   # Generate UI dynamically in the server
   output$Modal_student <- renderUI({
     fluidPage(
@@ -599,10 +644,10 @@ server <- function(input, output, session) {
         style = "display: none;",
         div(
           id = "modalContent",
-          style = "position: fixed; 
+          style = "position: fixed;
           top: 50%;
-          left: 50%; transform: translate(-50%, -50%); 
-          background-color: white; 
+          left: 50%; transform: translate(-50%, -50%);
+          background-color: white;
           padding: 5px 10px 5px 10px;
           box-shadow: 0px 0px 5000px rgba(0, 0, 0, 0.5);
           border-radius: 5px;
@@ -610,20 +655,20 @@ server <- function(input, output, session) {
           h4("Record Photo"),
           img(id = "modalImage_student", style = "display: block; max-width: auto; max-height: 50vh; margin: auto"),
           br(),
-          actionButton("closeModalBtn_student", "Close Modal", style = "display: 
-                       block; background-color: #619e62; color: #ffffff; 
+          actionButton("closeModalBtn_student", "Close Modal", style = "display:
+                       block; background-color: #619e62; color: #ffffff;
                        border: none; border-radius: 5px; cursor: pointer;
                        font-size; 16px; margin: auto")
         )
       )
     )
   })
-  
-  
+
+
   # observeEvent(input$student_table_rows_selected, {
   #   selected_row <- input$student_table_rows_selected
   #   selected_photo <- stud_df()[selected_row, ]$PhotoID
-  # 
+  #
   #   if (!is.na(selected_photo)) {
   #     selected_data <- stud_df()[selected_row, ]
   #     showModal(modalDialog(
@@ -648,12 +693,12 @@ server <- function(input, output, session) {
   # If the image is not found, it shows an error modal.
   # Output photo of record when row selected from above datatable
   # When a user selects a row in the data table, this observer displays the associated photo for the record
-  
+
   observeEvent(input$viewButton, {
     # Remove trailing space from PhotoID input
     cleaned_photo_id <- str_trim(input$PhotoID, side = "right")
     filename <- paste0("www/", cleaned_photo_id)
-    
+
     if (file.exists(filename)) {
       output$imageOutput <- renderUI({
         div <- tags$div(
@@ -661,8 +706,9 @@ server <- function(input, output, session) {
         )
         div
       })
-      toggle("imageOutput")} 
-    # else {  
+      toggle("imageOutput")
+    }
+    # else {
     #   # output$error_message <- renderUI({
     #   # p("Image not found. Please enter a valid filename.")
     #   #   })
@@ -670,5 +716,3 @@ server <- function(input, output, session) {
     # }
   })
 }
-
-

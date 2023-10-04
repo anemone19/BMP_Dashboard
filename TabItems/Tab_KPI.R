@@ -14,13 +14,24 @@ Tab1 <- tabItem(
     valueBoxOutput("local"),
     valueBoxOutput("fife")
   ),
-  h3("Change Biodiversity Index"),
-  fluidRow(),
+  
+  div(
+    conditionalPanel(
+      "input.year !== '2022/2023'",
+      h3("Change Biodiversity Index"),
+      # place CBI metric / plot here
+      box(
+        collapsible = TRUE, width = 12,
+        plotlyOutput("example_plot"), style = "display:block; overflow-x: scroll;"
+      )
+    )
+  ),
 
   # taxa chart
   fluidRow(
-    box(collapsible = TRUE, width = 12,
-      plotlyOutput("taxa_bar", height = "300px"), style = 'display:block; overflow-x: scroll;'
+    box(
+      collapsible = TRUE, width = 12, title = "Number of species per taxa",
+      plotlyOutput("taxa_bar", height = "300px"), style = "display:block; overflow-x: scroll;"
     )
   )
 )
