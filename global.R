@@ -35,7 +35,7 @@ library(RSQLite)
 # Test two years of data --------------------------------------------------------------------
 
 load("www/Team_Data/student_text_sep.RData")
-load("all_years.RData")
+load("www/all_years.RData")
 
 source("Modules/valuebox_module.R")
 
@@ -126,6 +126,6 @@ table_options <- function() {
 # to republish app, run code below or use button next to Run App
 # insert path to app directory 
 # NB: COMMENT OUT CODE WHEN RUNNING LOCALLY 
-rsconnect::deployApp("/Users/anecloete/Desktop/BMP_Dashboard",forceUpdate = T)
+# rsconnect::deployApp("/Users/anecloete/Desktop/BMP_Dashboard",forceUpdate = T)
  
 

@@ -153,6 +153,7 @@ html, body {
     display: flex;
     left: 46%;
     overflow: auto;
+    width: auto;
 }
 
 .landing-wrapper-record .foreground-content .foreground-text {

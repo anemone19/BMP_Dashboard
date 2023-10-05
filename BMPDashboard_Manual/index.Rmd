@@ -15,40 +15,35 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# Welcome
+```{r, include = FALSE}
 
-## Usage 
+knitr::opts_chunk$set(eval=FALSE)
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
-
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
-
-## Render book
-
-You can render the HTML version of this example book without changing anything:
-
-1. Find the **Build** pane in the RStudio IDE, and
-
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
-
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
 ```
 
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+# Hi :)
 
-## Preview book
+Everything you need to know to takeover the maintaining and building of the BMP dashboard is in this bookdown. The first chapter will outline the R project folder structure and contents and then in Chapter two I'll talk about how to get the biodiversity data form OneDrive and prepare the data for the dashboard. The remaining chapters will delve into the code itself. 
 
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
+Before starting, here is a short list of handy resources: 
 
-```{r eval=FALSE}
-bookdown::serve_book()
-```
+- [R](https://bookdown.org/yih_huynh/Guide-to-R-Book/)
+- [Shiny # 1](https://shiny.posit.co/r/articles/#user-interface)
+- [Shiny # 2](https://mastering-shiny.org/)
+- [Github](https://happygitwithr.com/existing-github-last)
+- [Bookdown](https://bookdown.org/yihui/bookdown/get-started.html) (if you want to know how to make something like this). 
+- [HTML and CSS](https://unleash-shiny.rinterface.com/)
 
+These are big and comprehensive resources that will aid you along the way. But remember google and [stackoverflow](https://stackoverflow.com/) are your best friends! And ChatGPT might become your closest and most frustrating colleague. 
+
+## Owners 
+
+- [Ané Cloete](https://www.linkedin.com/in/an%C3%A9-c-95629ab5/) (2023) 
+
+If you are the new dashboard manager, add your name as well! All you need to do is open the bookdown project and navigate to the "index.Rmd" file and scroll down till you see this section. In the next chapter you'll see where this folder is located. 
+
+
+Remember the dashboard is work in progress, so feel free to change and modify it as you like and most importantly have fun with it! Let's begin!
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 UI | BMP Dashboard Manual</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 UI | BMP Dashboard Manual" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 UI | BMP Dashboard Manual" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Ané Cloete" />
+
+
+<meta name="date" content="2023-10-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-data.html"/>
+<link rel="next" href="server.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like https://bookdown.org/yihui/bookdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#owners"><i class="fa fa-check"></i><b>1.1</b> Owners</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html"><i class="fa fa-check"></i><b>2</b> Files within folders and folders within files and more files</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#biodiversity-kpi-mapping-master"><i class="fa fa-check"></i><b>2.1</b> Biodiversity KPI mapping Master</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#biodiversity-survey-master"><i class="fa fa-check"></i><b>2.1.1</b> Biodiversity Survey Master</a></li>
+<li class="chapter" data-level="2.1.2" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#team_data"><i class="fa fa-check"></i><b>2.1.2</b> Team_Data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#survey_photos"><i class="fa fa-check"></i><b>2.1.3</b> Survey_Photos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#bmpdashboard"><i class="fa fa-check"></i><b>2.2</b> BMPDashboard</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#remotedatapullprepare.r"><i class="fa fa-check"></i><b>2.2.1</b> RemoteDataPullPrepare.R</a></li>
+<li class="chapter" data-level="2.2.2" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#global.r-ui.r-and-server.r"><i class="fa fa-check"></i><b>2.2.2</b> global.R, ui.R and server.R</a></li>
+<li class="chapter" data-level="2.2.3" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#tabitems"><i class="fa fa-check"></i><b>2.2.3</b> TabItems</a></li>
+<li class="chapter" data-level="2.2.4" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#modules"><i class="fa fa-check"></i><b>2.2.4</b> Modules</a></li>
+<li class="chapter" data-level="2.2.5" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#www"><i class="fa fa-check"></i><b>2.2.5</b> www</a></li>
+<li class="chapter" data-level="2.2.6" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#readme.md"><i class="fa fa-check"></i><b>2.2.6</b> README.md</a></li>
+<li class="chapter" data-level="2.2.7" data-path="files-within-folders-and-folders-within-files-and-more-files.html"><a href="files-within-folders-and-folders-within-files-and-more-files.html#packages.r"><i class="fa fa-check"></i><b>2.2.7</b> packages.R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="the-data.html"><a href="the-data.html"><i class="fa fa-check"></i><b>3</b> The Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="the-data.html"><a href="the-data.html#setting-up-onedrive"><i class="fa fa-check"></i><b>3.1</b> Setting up OneDrive</a></li>
+<li class="chapter" data-level="3.2" data-path="the-data.html"><a href="the-data.html#getting-the-data"><i class="fa fa-check"></i><b>3.2</b> Getting the data</a></li>
+<li class="chapter" data-level="3.3" data-path="the-data.html"><a href="the-data.html#data-cleaning-and-preparation"><i class="fa fa-check"></i><b>3.3</b> Data cleaning and preparation</a></li>
+<li class="chapter" data-level="3.4" data-path="the-data.html"><a href="the-data.html#pulling-photos-and-documents-from-onedrive"><i class="fa fa-check"></i><b>3.4</b> Pulling photos and documents from OneDrive</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="the-data.html"><a href="the-data.html#photos"><i class="fa fa-check"></i><b>3.4.1</b> Photos</a></li>
+<li class="chapter" data-level="3.4.2" data-path="the-data.html"><a href="the-data.html#documents"><i class="fa fa-check"></i><b>3.4.2</b> Documents</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="the-data.html"><a href="the-data.html#things-to-think-about"><i class="fa fa-check"></i><b>3.5</b> Things to think about</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i><b>4</b> UI</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ui.html"><a href="ui.html#ui.r"><i class="fa fa-check"></i><b>4.1</b> ui.R</a></li>
+<li class="chapter" data-level="4.2" data-path="ui.html"><a href="ui.html#tabs"><i class="fa fa-check"></i><b>4.2</b> Tabs</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="ui.html"><a href="ui.html#tab_about"><i class="fa fa-check"></i><b>4.2.1</b> Tab_About</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ui.html"><a href="ui.html#tab_kpi"><i class="fa fa-check"></i><b>4.2.2</b> Tab_KPI</a></li>
+<li class="chapter" data-level="4.2.3" data-path="ui.html"><a href="ui.html#tab_record_finder"><i class="fa fa-check"></i><b>4.2.3</b> Tab_Record_Finder</a></li>
+<li class="chapter" data-level="4.2.4" data-path="ui.html"><a href="ui.html#tab_student_engagement"><i class="fa fa-check"></i><b>4.2.4</b> Tab_Student_Engagement</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="server.html"><a href="server.html"><i class="fa fa-check"></i><b>5</b> Server</a></li>
+<li class="chapter" data-level="6" data-path="next-steps.html"><a href="next-steps.html"><i class="fa fa-check"></i><b>6</b> Next Steps</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="next-steps.html"><a href="next-steps.html#different-years-different-data"><i class="fa fa-check"></i><b>6.1</b> Different years different data:</a></li>
+<li class="chapter" data-level="6.2" data-path="next-steps.html"><a href="next-steps.html#data-download-and-clean-automation"><i class="fa fa-check"></i><b>6.2</b> Data download and clean automation:</a></li>
+<li class="chapter" data-level="6.3" data-path="next-steps.html"><a href="next-steps.html#survey-photos"><i class="fa fa-check"></i><b>6.3</b> Survey Photos:</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BMP Dashboard Manual</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ui" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> UI<a href="ui.html#ui" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="ui.r" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> ui.R<a href="ui.html#ui.r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here we define the user interface (UI) for the dashboard. First we source the ui code for each of the tabs:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="ui.html#cb1-1" tabindex="-1"></a><span class="co"># source tabItems</span></span>
+<span id="cb1-2"><a href="ui.html#cb1-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;TabItems/Tab_KPI.R&quot;</span>)</span>
+<span id="cb1-3"><a href="ui.html#cb1-3" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;TabItems/Tab_Taxa_Explorer.R&quot;</span>)</span>
+<span id="cb1-4"><a href="ui.html#cb1-4" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;TabItems/Tab_Student_Engagement.R&quot;</span>)</span>
+<span id="cb1-5"><a href="ui.html#cb1-5" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;TabItems/Tab_About.R&quot;</span>)</span>
+<span id="cb1-6"><a href="ui.html#cb1-6" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;TabItems/Tab_Record_Finder.R&quot;</span>)</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><strong>Header Section (<code>dashboardHeader</code>):</strong>
+<ul>
+<li>Sets up the header of the dashboard with the title “Biodiversity Monitoring Programme.”</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="ui.html#cb2-1" tabindex="-1"></a><span class="co"># 1. HEADER ---------------------------------------------------------------------------------------------------</span></span>
+<span id="cb2-2"><a href="ui.html#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="ui.html#cb2-3" tabindex="-1"></a>header <span class="ot">&lt;-</span> <span class="fu">dashboardHeader</span>(</span>
+<span id="cb2-4"><a href="ui.html#cb2-4" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Biodiversity Monitoring Programme&quot;</span>,</span>
+<span id="cb2-5"><a href="ui.html#cb2-5" tabindex="-1"></a>  <span class="at">titleWidth =</span> <span class="dv">320</span></span>
+<span id="cb2-6"><a href="ui.html#cb2-6" tabindex="-1"></a>)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Sidebar Section (<code>dashboardSidebar</code>):</strong>
+<ul>
+<li>Creates a sidebar that contains a menu (<code>sidebarMenu</code>) with several items.</li>
+<li>It includes a dropdown (<code>selectInput</code>) for choosing the survey year.</li>
+<li>Menu items include “About,” “Key Performance Indices,” “Taxa Explorer,” “Student Engagement,” and “Record Finder.”</li>
+<li>Conditional panels (<code>conditionalPanel</code>) show/hide additional input fields based on the selected menu item. For example, when “Taxa Explorer” is selected, a dropdown to select a taxa is displayed; when “Student Engagement” is selected, a dropdown to select a student is displayed.</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ui.html#cb3-1" tabindex="-1"></a><span class="co"># 2. SIDEBAR ---------------------------------------------------------------------------------------------------</span></span>
+<span id="cb3-2"><a href="ui.html#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="ui.html#cb3-3" tabindex="-1"></a>sidebar <span class="ot">&lt;-</span> <span class="fu">dashboardSidebar</span>(</span>
+<span id="cb3-4"><a href="ui.html#cb3-4" tabindex="-1"></a>  <span class="fu">sidebarMenu</span>(</span>
+<span id="cb3-5"><a href="ui.html#cb3-5" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;sidebar&quot;</span>,</span>
+<span id="cb3-6"><a href="ui.html#cb3-6" tabindex="-1"></a>    </span>
+<span id="cb3-7"><a href="ui.html#cb3-7" tabindex="-1"></a>    <span class="co"># select survey year</span></span>
+<span id="cb3-8"><a href="ui.html#cb3-8" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;year&quot;</span>, <span class="at">label =</span> <span class="st">&quot;Select year&quot;</span>, <span class="at">choices =</span> years),</span>
+<span id="cb3-9"><a href="ui.html#cb3-9" tabindex="-1"></a>    </span>
+<span id="cb3-10"><a href="ui.html#cb3-10" tabindex="-1"></a>    <span class="co"># About Page</span></span>
+<span id="cb3-11"><a href="ui.html#cb3-11" tabindex="-1"></a>    <span class="fu">menuItem</span>(<span class="st">&quot;About&quot;</span>, <span class="at">tabName =</span> <span class="st">&quot;about&quot;</span>, <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;circle-info&quot;</span>)),</span>
+<span id="cb3-12"><a href="ui.html#cb3-12" tabindex="-1"></a>    </span>
+<span id="cb3-13"><a href="ui.html#cb3-13" tabindex="-1"></a>    <span class="co"># first menu item: Key Performance Indices</span></span>
+<span id="cb3-14"><a href="ui.html#cb3-14" tabindex="-1"></a>    <span class="fu">menuItem</span>(<span class="st">&quot;Key Performance Indices&quot;</span>, <span class="at">tabName =</span> <span class="st">&quot;kpi&quot;</span>, <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;gauge&quot;</span>)),</span>
+<span id="cb3-15"><a href="ui.html#cb3-15" tabindex="-1"></a>    </span>
+<span id="cb3-16"><a href="ui.html#cb3-16" tabindex="-1"></a>    <span class="co"># second menu item: Taxa Explorer</span></span>
+<span id="cb3-17"><a href="ui.html#cb3-17" tabindex="-1"></a>    <span class="fu">menuItem</span>(<span class="st">&quot;Taxa Explorer&quot;</span>, <span class="at">tabName =</span> <span class="st">&quot;taxa_expl&quot;</span>, <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;crow&quot;</span>)),</span>
+<span id="cb3-18"><a href="ui.html#cb3-18" tabindex="-1"></a>    </span>
+<span id="cb3-19"><a href="ui.html#cb3-19" tabindex="-1"></a>    <span class="co"># Show panel only when taxa explorer sidebar is selected</span></span>
+<span id="cb3-20"><a href="ui.html#cb3-20" tabindex="-1"></a>    <span class="fu">useShinyjs</span>(),</span>
+<span id="cb3-21"><a href="ui.html#cb3-21" tabindex="-1"></a>    </span>
+<span id="cb3-22"><a href="ui.html#cb3-22" tabindex="-1"></a>    <span class="co"># select taxa</span></span>
+<span id="cb3-23"><a href="ui.html#cb3-23" tabindex="-1"></a>    <span class="fu">div</span>(</span>
+<span id="cb3-24"><a href="ui.html#cb3-24" tabindex="-1"></a>      <span class="at">id =</span> <span class="st">&quot;taxa_cond&quot;</span>,</span>
+<span id="cb3-25"><a href="ui.html#cb3-25" tabindex="-1"></a>      <span class="fu">conditionalPanel</span>(</span>
+<span id="cb3-26"><a href="ui.html#cb3-26" tabindex="-1"></a>        <span class="st">&quot;input.sidebar == &#39;taxa_expl&#39;&quot;</span>,</span>
+<span id="cb3-27"><a href="ui.html#cb3-27" tabindex="-1"></a>        <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;taxa_select&quot;</span>, <span class="at">label =</span> <span class="st">&quot;Select taxa&quot;</span>, <span class="at">choices =</span> <span class="cn">NULL</span>)</span>
+<span id="cb3-28"><a href="ui.html#cb3-28" tabindex="-1"></a>      )</span>
+<span id="cb3-29"><a href="ui.html#cb3-29" tabindex="-1"></a>    ),</span>
+<span id="cb3-30"><a href="ui.html#cb3-30" tabindex="-1"></a>    </span>
+<span id="cb3-31"><a href="ui.html#cb3-31" tabindex="-1"></a>    <span class="co"># third menu item: Student Engagement</span></span>
+<span id="cb3-32"><a href="ui.html#cb3-32" tabindex="-1"></a>    <span class="fu">menuItem</span>(<span class="st">&quot;Student Engagement&quot;</span>, <span class="at">tabName =</span> <span class="st">&quot;stud_expl&quot;</span>, <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;graduation-cap&quot;</span>)),</span>
+<span id="cb3-33"><a href="ui.html#cb3-33" tabindex="-1"></a>    </span>
+<span id="cb3-34"><a href="ui.html#cb3-34" tabindex="-1"></a>    <span class="co"># select Observer</span></span>
+<span id="cb3-35"><a href="ui.html#cb3-35" tabindex="-1"></a>    <span class="fu">div</span>(</span>
+<span id="cb3-36"><a href="ui.html#cb3-36" tabindex="-1"></a>      <span class="at">id =</span> <span class="st">&quot;student_cond&quot;</span>,</span>
+<span id="cb3-37"><a href="ui.html#cb3-37" tabindex="-1"></a>      <span class="fu">conditionalPanel</span>(</span>
+<span id="cb3-38"><a href="ui.html#cb3-38" tabindex="-1"></a>        <span class="st">&quot;input.sidebar == &#39;stud_expl&#39;&quot;</span>,</span>
+<span id="cb3-39"><a href="ui.html#cb3-39" tabindex="-1"></a>        <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;student_select&quot;</span>, <span class="at">label =</span> <span class="st">&quot;Select Student&quot;</span>, <span class="at">choices =</span> <span class="cn">NULL</span>)</span>
+<span id="cb3-40"><a href="ui.html#cb3-40" tabindex="-1"></a>      )</span>
+<span id="cb3-41"><a href="ui.html#cb3-41" tabindex="-1"></a>    ),</span>
+<span id="cb3-42"><a href="ui.html#cb3-42" tabindex="-1"></a>    </span>
+<span id="cb3-43"><a href="ui.html#cb3-43" tabindex="-1"></a>    <span class="co"># fourth menu item: Record &amp; Photos</span></span>
+<span id="cb3-44"><a href="ui.html#cb3-44" tabindex="-1"></a>    <span class="fu">menuItem</span>(<span class="st">&quot;Record Finder&quot;</span>, <span class="at">tabName =</span> <span class="st">&quot;record_finder&quot;</span>, <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;camera-retro&quot;</span>))</span>
+<span id="cb3-45"><a href="ui.html#cb3-45" tabindex="-1"></a>  )</span>
+<span id="cb3-46"><a href="ui.html#cb3-46" tabindex="-1"></a>)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Body Section (<code>dashboardBody</code>):</strong>
+<ul>
+<li>Defines the main body of the dashboard.</li>
+<li>Utilizes the <code>dashboardBody</code> function and includes additional styling using <code>tags$head</code> to link an external stylesheet (<code>custom.css</code>).</li>
+<li>Uses the <code>tabItems</code> function to organize the content into different tabs (e.g., <code>Tab0</code>, <code>Tab1</code>, etc.).</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="ui.html#cb4-1" tabindex="-1"></a><span class="co"># 3. BODY ---------------------------------------------------------------------------------------------------</span></span>
+<span id="cb4-2"><a href="ui.html#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="ui.html#cb4-3" tabindex="-1"></a>body <span class="ot">&lt;-</span> <span class="fu">dashboardBody</span>(</span>
+<span id="cb4-4"><a href="ui.html#cb4-4" tabindex="-1"></a>  <span class="fu">useShinyjs</span>(),</span>
+<span id="cb4-5"><a href="ui.html#cb4-5" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">head</span>(</span>
+<span id="cb4-6"><a href="ui.html#cb4-6" tabindex="-1"></a>    tags<span class="sc">$</span><span class="fu">link</span>(<span class="at">rel =</span> <span class="st">&quot;stylesheet&quot;</span>, <span class="at">type =</span> <span class="st">&quot;text/css&quot;</span>, <span class="at">href =</span> <span class="st">&quot;custom.css&quot;</span>)</span>
+<span id="cb4-7"><a href="ui.html#cb4-7" tabindex="-1"></a>  ),</span>
+<span id="cb4-8"><a href="ui.html#cb4-8" tabindex="-1"></a>  <span class="fu">tabItems</span>(</span>
+<span id="cb4-9"><a href="ui.html#cb4-9" tabindex="-1"></a>    Tab0,</span>
+<span id="cb4-10"><a href="ui.html#cb4-10" tabindex="-1"></a>    Tab1,</span>
+<span id="cb4-11"><a href="ui.html#cb4-11" tabindex="-1"></a>    Tab2,</span>
+<span id="cb4-12"><a href="ui.html#cb4-12" tabindex="-1"></a>    Tab3,</span>
+<span id="cb4-13"><a href="ui.html#cb4-13" tabindex="-1"></a>    Tab4</span>
+<span id="cb4-14"><a href="ui.html#cb4-14" tabindex="-1"></a>  )</span>
+<span id="cb4-15"><a href="ui.html#cb4-15" tabindex="-1"></a>)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>UI Function (<code>dashboardPage</code>):</strong>
+<ul>
+<li>Combines the header, sidebar, and body into a complete UI using the <code>dashboardPage</code> function.</li>
+<li>This UI function essentially wraps up all the UI components, creating the structure of the Shiny app.</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ui.html#cb5-1" tabindex="-1"></a><span class="co"># 4. UI Function ---------------------------------------------------------------------------------------------------</span></span>
+<span id="cb5-2"><a href="ui.html#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="ui.html#cb5-3" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">dashboardPage</span>(header, sidebar, body)</span></code></pre></div>
+</div>
+<div id="tabs" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Tabs<a href="ui.html#tabs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="tab_about" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Tab_About<a href="ui.html#tab_about" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="tab_kpi" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Tab_KPI<a href="ui.html#tab_kpi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="tab_record_finder" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Tab_Record_Finder<a href="ui.html#tab_record_finder" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="tab_student_engagement" class="section level3 hasAnchor" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> Tab_Student_Engagement<a href="ui.html#tab_student_engagement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="server.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-UI.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

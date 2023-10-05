@@ -189,8 +189,8 @@ all_years <- all_years %>% mutate(long = unlist(map(geometry,1)),
            lat = unlist(map(geometry,2)))
 
 # Save the resulting dataframe
-save(all_years, file = "all_years.RData")
-write.csv(all_years, file = "all_years.csv")
+save(all_years, file = "www/all_years.RData")
+write.csv(all_years, file = "www/all_years.csv")
 
 # Pull Photos ---------------------------------------------------------------
 

@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Blocks | BMP Dashboard Manual</title>
+  <title>6 Next Steps | BMP Dashboard Manual</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Blocks | BMP Dashboard Manual" />
+  <meta property="og:title" content="6 Next Steps | BMP Dashboard Manual" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Blocks | BMP Dashboard Manual" />
+  <meta name="twitter:title" content="6 Next Steps | BMP Dashboard Manual" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -36,8 +36,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="footnotes-and-citations.html"/>
-<link rel="next" href="next-steps.html"/>
+<link rel="prev" href="blocks.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -241,30 +241,20 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="blocks" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">5</span> Blocks<a href="blocks.html#blocks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="equations" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Equations<a href="blocks.html#equations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Here is an equation.</p>
-<p><span class="math display" id="eq:binom">\[\begin{equation}
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \tag{5.1}
-\end{equation}\]</span></p>
-<p>You may refer to using <code>\@ref(eq:binom)</code>, like see Equation <a href="blocks.html#eq:binom">(5.1)</a>.</p>
+<div id="next-steps" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Next Steps<a href="next-steps.html#next-steps" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Here is a list of things that need to be done:</p>
+<div id="different-years-different-data" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Different years different data:<a href="next-steps.html#different-years-different-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Currently, the dashboard works a dataset containing data for multiple years - I created a fake dataset for the next academic year as a subset of the 2023 data. The data is combined into the all_years.RData. It might be better to have separate datasets and store them in a list, its up to you. The next point will influence this too.</p>
 </div>
-<div id="theorems-and-proofs" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Theorems and proofs<a href="blocks.html#theorems-and-proofs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Labeled theorems can be referenced in text using <code>\@ref(thm:tri)</code>, for example, check out this smart theorem <a href="blocks.html#thm:tri">5.1</a>.</p>
-<div class="theorem">
-<p><span id="thm:tri" class="theorem"><strong>Theorem 5.1  </strong></span>For a right triangle, if <span class="math inline">\(c\)</span> denotes the <em>length</em> of the hypotenuse
-and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> denote the lengths of the <strong>other</strong> two sides, we have
-<span class="math display">\[a^2 + b^2 = c^2\]</span></p>
+<div id="data-download-and-clean-automation" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Data download and clean automation:<a href="next-steps.html#data-download-and-clean-automation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The pulling and preparing of the data should be made automatic, i.e. everyday during the survey season the data should be pulled from OneDrive, cleaned and uploaded to the dashboard. However, as more data is collected it will probably be better to upload the data to OneDrive (i.e. not host it on your laptop or shiny server) and have the dashboard pull the data from OneDrive. This will also affect how the dashboard accesses separate years data.</p>
 </div>
-<p>Read more here <a href="https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html</a>.</p>
-</div>
-<div id="callout-blocks" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Callout blocks<a href="blocks.html#callout-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: <a href="https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html</a></p>
+<div id="survey-photos" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Survey Photos:<a href="next-steps.html#survey-photos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The same also applies to the photos. It might be better to pull the photos directly from OneDrive in the app. I’m not sure how to do this and maybe there’s a different way to store and retrieve the photos.</p>
 
 </div>
 </div>
@@ -273,8 +263,8 @@ and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</
           </div>
         </div>
       </div>
-<a href="footnotes-and-citations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="next-steps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="blocks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -305,7 +295,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-server.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-next.Rmd",
 "text": "Edit"
 },
 "history": {

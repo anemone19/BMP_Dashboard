@@ -1,13 +1,7 @@
 
 # The Data 
 
-```{r, include = FALSE}
-
-knitr::opts_chunk$set(eval=FALSE)
-
-```
-
-## Setting up OneDrive:
+## Setting up OneDrive
 
 The following instructions are for Mac users. If you are using windows, you should have OneDrive already installed on your computer.
 
@@ -38,23 +32,19 @@ The following instructions are for Mac users. If you are using windows, you shou
      - Setting up file on-demand (allows you to see all your files without having them downloaded).
 
 6. **Accessing Your Files:**
-   - A OneDrive folder will now be present in your Mac's Finder. This folder will sync with your online OneDrive storage. <span style = "color: red; font-weight: bold"> Any files or folders you add to this folder will be automatically uploaded to the cloud, and any changes you make to files in this folder will be reflected in the cloud version.</span> Read that again! It important that you know that if you change or delete any files in the OneDrive folder on your laptop it will affect the database online. 
+
+ - A OneDrive folder will now be present in your Mac's Finder. This folder will sync with your online OneDrive storage. <span style = "color: red; font-weight: bold"> Any files or folders you add to this folder will be automatically uploaded to the cloud, and any changes you make to files in this folder will be reflected in the cloud version.</span> Read that again! It important that you know that if you change or delete any files in the OneDrive folder on your laptop it will affect the database online. 
 
 7. **To Unlink or Sign Out:**
    - If you ever wish to unlink your account or sign out, click on the OneDrive icon in the Mac menu bar.
    - Click on the three dots (More) and select "Preferences."
    - Go to the "Account" tab and select "Unlink this Mac."
 
-### Windows: 
-
-
-## Structure of the Biodiversity KPI Mapping Master
-
 ## Getting the data 
 
 First, navigate to the R script called "packages" to check whether you have all the required packages, if you don't the script will also install and load them for you. Done!
 
-Now navigate to the script "RemoteDataPull_Prepare", it contains all the code for pulling and cleaning the biodiversity data collected by the students. Each student will have their own folder within this folder. Within each of the student folders, there are various geopackages, one for each taxa they have surveyed. The naming of the geopackages are their initials or names followed by the particular taxa, e.g. Ericabutterflies.gpkg. 
+Now, open the script "RemoteDataPull_Prepare".  
 
 The most important first step here is to modify the object "path_to_master" with the filepath to where ever you have the OneDrive folder on your device and specifically to the main survey folder "Biodiversity Survey Master". If you are using a Mac, navigate to the folder in Finder and then in the bottom panel (see below), right click the folder name and select "Copy "folder name" as Pathname". 
 
@@ -65,7 +55,7 @@ Let's break down the code:
 1. **Setting the Path to the Master Directory**:
 
 ```{r}
-   path_to_master <- "/Users/anecloete/Library/CloudStorage/OneDrive-UniversityofStAndrews/Biodiversity KPI mapping Master/Biodiversity Survey Master"
+   path_to_master <- "/Users/anecloete/Library/CloudStorage/OneDrive-UniversityofStAndrews/Biodiversity KPI mapping Master"
 ```
 
 This line sets a variable called `path_to_master` to the path of the main directory where the geopackage files are located. Paste the pathname you copied here. 
@@ -73,12 +63,12 @@ This line sets a variable called `path_to_master` to the path of the main direct
 2. **Obtaining All Geopackage Files**:
 
 ```{r}
-   all_gpkgs <- list.files(
-     path = paste(path_to_master),
-     recursive = TRUE,
-     pattern = "\\.gpkg$",
-     full.names = TRUE
-   )
+all_gpkgs <- list.files(
+  path = paste0(path_to_master,"/Biodiversity Survey Master"),
+  recursive = TRUE,
+  pattern = "\\.gpkg$",
+  full.names = TRUE
+)
 ```
 
 This code lists all files with the ".gpkg" extension in the specified directory and its subdirectories. 

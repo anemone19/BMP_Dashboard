@@ -1,0 +1,19 @@
+# Next Steps
+
+Here is a list of things that need to be done: 
+
+## Different years different data:
+
+Currently, the dashboard works a dataset containing data for multiple years - I created a fake dataset for the next academic year as a subset of the 2023 data. The data is combined into the all_years.RData. It might be better to have separate datasets and store them in a list, its up to you. The next point will influence this too. 
+
+
+## Data download and clean automation: 
+
+The pulling and preparing of the data should be made automatic, i.e. everyday during the survey season the data should be pulled from OneDrive, cleaned and uploaded to the dashboard. However, as more data is collected it will probably be better to upload the data to OneDrive (i.e. not host it on your laptop or shiny server) and have the dashboard pull the data from OneDrive. This will also affect how the dashboard accesses separate years data. 
+
+## Survey Photos:
+
+The same also applies to the photos. It might be better to pull the photos directly from OneDrive in the app. I'm not sure how to do this and maybe there's a different way to store and retrieve the photos. 
+
+
+

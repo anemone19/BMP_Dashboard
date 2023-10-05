@@ -2,7 +2,7 @@
 
 # read in all photo files within Survey_Photos in OneDrive Folder
 all_Sphotos <- list.files(
-  path = paste0("www/Survey_Photos"),
+  path = paste0("www/"),
   recursive = TRUE,
   pattern = "\\.jpg$",
   full.names = FALSE
