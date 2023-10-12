@@ -1,4 +1,4 @@
-url-your-book-url-like-httpsbookdown.orgyihuibookdown
+hi
 owners
 files-within-folders-and-folders-within-files-and-more-files
 biodiversity-kpi-mapping-master
@@ -30,7 +30,15 @@ tab_taxa_explorer
 tab_student_engagement
 tab_record_finder
 server
+setup
+valuebox-module
+tab-about
+tab-kpi
+tab-taxa-explorer
+tab-student-engagement
+tab-record-finder
 next-steps
+error-message-record-finder
 different-years-different-data
 data-download-and-clean-automation
 survey-photos
@@ -46,11 +54,3 @@ use-cases
 performance-considerations
 reactive-conductors
 isolation-of-reactivity
-tab-about
-tab-kpi
-tab-taxa-explorer
-tab-student-engagement
-tab-record-finder
-setup
-valuebox-module
-example-plot-for-change-cbi

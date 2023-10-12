@@ -642,26 +642,6 @@ server <- function(input, output, session) {
     )
   })
 
-
-  # observeEvent(input$student_table_rows_selected, {
-  #   selected_row <- input$student_table_rows_selected
-  #   selected_photo <- stud_df()[selected_row, ]$PhotoID
-  #
-  #   if (!is.na(selected_photo)) {
-  #     selected_data <- stud_df()[selected_row, ]
-  #     showModal(modalDialog(
-  #       title = "Record Photo",
-  #       output$imageOutput1 <- renderImage(
-  #         {
-  #           list(src = paste0("www/Survey_Photos/", selected_photo), width = "100%", height = "auto")
-  #         },
-  #         deleteFile = FALSE
-  #       ),
-  #       easyClose = TRUE
-  #     ))
-  #   }
-  # })
-
   # TAB 4: RECORD FINDER -----------------------------------------------------------------------
   # This section handles the functionality to fetch and display a record photos
   # based on user inputed photoID

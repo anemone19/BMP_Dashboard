@@ -237,7 +237,7 @@ output$S_H_about <- valuebox_server(
 
 **More ABI Descriptions:**
 
-```r
+```{r}
 output$area_about <- valuebox_server(
   id = "area_about",
   subtitle = paste(par_l_s),
@@ -360,9 +360,7 @@ An example plot is provided for the Change Biodiversity Index (CBI). This plot i
 
 ```
 
-- This plot serves as an example for the Change Biodiversity Index, providing a visual representation of the CBI values across different years.
-
-
+This plot serves as an example for the Change Biodiversity Index, providing a visual representation of the CBI values across different years.
 
 ## Tab Taxa Explorer
 

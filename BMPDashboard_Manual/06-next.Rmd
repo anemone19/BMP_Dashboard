@@ -2,6 +2,10 @@
 
 Here is a list of things that need to be done: 
 
+## Error message Record Finder
+
+If the photo ID is incorrect, an error message should be displayed. 
+
 ## Different years different data:
 
 Currently, the dashboard works a dataset containing data for multiple years - I created a fake dataset for the next academic year as a subset of the 2023 data. The data is combined into the all_years.RData. It might be better to have separate datasets and store them in a list, its up to you. The next point will influence this too. 

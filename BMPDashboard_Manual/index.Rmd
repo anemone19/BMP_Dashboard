@@ -5,12 +5,6 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
@@ -28,10 +22,15 @@ Everything you need to know to takeover the maintaining and building of the BMP 
 Before starting, here is a short list of handy resources: 
 
 - [R](https://bookdown.org/yih_huynh/Guide-to-R-Book/)
+
 - [Shiny # 1](https://shiny.posit.co/r/articles/#user-interface)
+
 - [Shiny # 2](https://mastering-shiny.org/)
+
 - [Github](https://happygitwithr.com/existing-github-last)
+
 - [Bookdown](https://bookdown.org/yihui/bookdown/get-started.html) (if you want to know how to make something like this). 
+
 - [HTML and CSS](https://unleash-shiny.rinterface.com/)
 
 These are big and comprehensive resources that will aid you along the way. But remember google and [stackoverflow](https://stackoverflow.com/) are your best friends! And ChatGPT might become your closest and most frustrating colleague. 
@@ -45,9 +44,3 @@ If you are the new dashboard manager, add your name as well! All you need to do 
 
 Remember the dashboard is work in progress, so feel free to change and modify it as you like and most importantly have fun with it! Let's begin!
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```

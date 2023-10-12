@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.12)  12 OCT 2023 09:46
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.12)  12 OCT 2023 11:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -736,9 +736,7 @@ No file _main.toc.
 
 ]
 Chapter 1.
-[5] [6
-
-]
+[5] [6]
 Chapter 2.
 Missing character: There is no 😅 (U+1F605) in font [lmroman10-regular]:mapping=tex-text;!
 File: images/KPI_contents.png Graphic file (type bmp)
@@ -746,7 +744,9 @@ File: images/KPI_contents.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[7]
+[7
+
+]
 File: images/megan_folder.png Graphic file (type bmp)
 <images/megan_folder.png>
 
@@ -758,12 +758,12 @@ Overfull \hbox (84.10013pt too wide) has occurred while \output is active
 File: images/BMPDashboard.png Graphic file (type bmp)
 <images/BMPDashboard.png>
 [9]
-Underfull \hbox (badness 2564) in paragraph at lines 253--254
+Underfull \hbox (badness 2564) in paragraph at lines 252--253
 \TU/lmr/m/n/10 Contains the ui code for each tab in the dashboard (Tab_About.R,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--254
+Underfull \hbox (badness 10000) in paragraph at lines 252--253
 \TU/lmr/m/n/10 Tab_KPI.R, Tab_Record_Finder.R, Tab_Student_Engagement.R and
  []
 
@@ -789,9 +789,9 @@ Underfull \vbox (badness 3492) has occurred while \output is active []
 
 [14]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 431.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 430.
 [15] [16] [17] [18] [19] [20]
-Overfull \hbox (8.30388pt too wide) in paragraph at lines 873--873
+Overfull \hbox (8.30388pt too wide) in paragraph at lines 872--872
 []\TU/lmr/bx/n/14.4 Pulling photos and documents from OneDrive 
  []
 
@@ -800,32 +800,32 @@ Chapter 4.
 [23
 
 ]
-Overfull \vbox (1.64996pt too high) detected at line 1070
+Overfull \vbox (1.64996pt too high) detected at line 1069
  []
 
 [24] [25] [26]
-Underfull \hbox (badness 10000) in paragraph at lines 1208--1209
+Underfull \hbox (badness 10000) in paragraph at lines 1207--1208
 \TU/lmr/m/n/10 “TomButterfly020823HolBl.jpg,” “TomMoth120823JulyHfly.jpg,” and
  []
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 1214.
+(Font)              scaled to size 7.0pt on input line 1213.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 1214.
+(Font)              scaled to size 5.0pt on input line 1213.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.00092pt on input line 1214.
+(Font)              scaled to size 10.00092pt on input line 1213.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00064pt on input line 1214.
+(Font)              scaled to size 7.00064pt on input line 1213.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00046pt on input line 1214.
+(Font)              scaled to size 5.00046pt on input line 1213.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.99893pt on input line 1214.
+(Font)              scaled to size 9.99893pt on input line 1213.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 1214.
+(Font)              scaled to size 6.99925pt on input line 1213.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 1214.
+(Font)              scaled to size 4.99947pt on input line 1213.
 [27] [28]
-Overfull \hbox (11.67381pt too wide) in paragraph at lines 1350--1351
+Overfull \hbox (11.67381pt too wide) in paragraph at lines 1349--1350
 []\TU/lmtt/m/n/10 box\TU/lmr/m/n/10 : A collapsible box containing a Plotly plot (\TU/lmtt/m/n/10 example_plot\TU/lmr/m/n/10 ).
  []
 
@@ -837,7 +837,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1461         \begin{itemize}
+l.1460         \begin{itemize}
                                
 Here is how much of TeX's memory you used:
  17512 strings out of 477166

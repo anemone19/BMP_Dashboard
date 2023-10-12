@@ -138,7 +138,6 @@ Everything you need to know to takeover the maintaining and building of the BMP 
 Before starting, here is a short list of handy resources:
 
 \begin{itemize}
-\tightlist
 \item
   \href{https://bookdown.org/yih_huynh/Guide-to-R-Book/}{R}
 \item
@@ -1840,11 +1839,14 @@ In the server.R file we define the server side of the shiny app. The code is nea
 
 Before that though, we do some NB things:
 
+\hypertarget{setup}{%
+\section{Setup}\label{setup}}
+
 \textbf{1. Fetching Data:}
 
 Reactive expression (\texttt{survey\_data}) fetches data based on the user-selected year (\texttt{input\$year}) from a list of data frames (\texttt{all\_years\_list}). Here we subset the data for the year the user selects and store in a reactive dataframe. If you're unfamiliar with reactive expressions, refer to the Master Shiny textbook! You can also look at the useful things section of this book, where I've provided some explanations of random shiny things.
 
-The data frame corresponding to the selected year is stored in \texttt{extract\_df}, and the reactive expression returns this subset of data.
+The data frame corresponding to the selected year is stored in \texttt{extract\_df}, and the reactive expression returns this subset of data. Now ``survey\_data'' is a reactive dataset and is called throughout the shiny app likes its a function, i.e.~``survey\_data()''.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1865,10 +1867,9 @@ The data frame corresponding to the selected year is stored in \texttt{extract\_
 \end{Highlighting}
 \end{Shaded}
 
-This reactive expression (\texttt{taxa\_names}) generates a sorted list of unique taxa names based on the currently selected survey data. It is likely intended for populating a dropdown menu in the Taxa Explorer tab.
+This reactive expression (\texttt{taxa\_names}) generates a sorted list of unique taxa names based on the currently selected survey data. We call the reactive dataset and then extrac and sort the unique entries in the Taxa column. The resulting reactive object taxa\_names is then used to populate the dropdown menu in for the Taxa Explorer tab.
 
-\hypertarget{student-names-for-student-engagement}{%
-\subsection{3. Student Names for Student Engagement:}\label{student-names-for-student-engagement}}
+\textbf{3. Student Names for Student Engagement:}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1881,14 +1882,11 @@ This reactive expression (\texttt{taxa\_names}) generates a sorted list of uniqu
 \end{Highlighting}
 \end{Shaded}
 
-\begin{itemize}
-\tightlist
-\item
-  This reactive expression (\texttt{student\_names}) extracts unique observer (student) names from the currently selected survey data. It removes any duplicate observer names and NA values. The result is a list of student names for populating a dropdown menu in the Student Engagement tab.
-\end{itemize}
+Here we do the same thing as in the previous block but for the student names. A few extra things are done: any duplicate observer names and NA values. The result is a list of student names for populating the dropdown menu in the Student Engagement tab.
 
-\hypertarget{updating-taxa-selection}{%
-\subsection{4. Updating Taxa Selection:}\label{updating-taxa-selection}}
+\textbf{4. Updating Taxa and Student Selection:}
+
+In the follwoing blocks of code, we take the reactive objects \texttt{taxa\_names} and \texttt{student\_names} and we update the dropdown menus:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1905,14 +1903,7 @@ This reactive expression (\texttt{taxa\_names}) generates a sorted list of uniqu
 \end{Highlighting}
 \end{Shaded}
 
-\begin{itemize}
-\tightlist
-\item
-  This \texttt{observeEvent} block reacts to changes in the selected year (\texttt{input\$year}). If the selected year is ``2022/2023,'' it updates the choices in the taxa dropdown menu (\texttt{taxa\_select}) with \texttt{taxa\_names()} and sets the default selected value to ``Butterflies.'' Otherwise, it updates the choices without a default selection.
-\end{itemize}
-
-\hypertarget{updating-student-selection}{%
-\subsection{5. Updating Student Selection:}\label{updating-student-selection}}
+If the selected year is ``2022/2023,'' it updates the choices in the taxa dropdown menu (\texttt{taxa\_select}) with \texttt{taxa\_names()} and sets the default selected value to ``Butterflies.'' Otherwise, it updates the choices without a default selection.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1925,18 +1916,698 @@ This reactive expression (\texttt{taxa\_names}) generates a sorted list of uniqu
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{valuebox-module}{%
+\section{Valuebox Module}\label{valuebox-module}}
+
+Let's go through how the shiny module for the custom valuebox is created. Open the ``valuebox\_module.R'' script in the Modules folder. I modified the code from this link and used \href{https://jkunst.com/blog/posts/2020-06-26-valuebox-and-sparklines/}{this website} as well. I mainly did this because I wnated more control over the appearance of the valueboxes. The standard valuebox from shinydashboard can only have select colors etc.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{\texttt{customValueBox} Function:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Purpose:} This function creates the HTML structure for a custom value box.
+  \item
+    \textbf{Parameters:}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{value}: The main value displayed in the value box.
+    \item
+      \texttt{subtitle}: Additional text displayed below the main value.
+    \item
+      \texttt{icon}: An optional icon to be displayed in the value box.
+    \item
+      \texttt{color}: Text color of the value box.
+    \item
+      \texttt{background}: Background color of the value box.
+    \item
+      \texttt{width}: Width of the value box (default is 4 columns in a 12-column grid).
+    \item
+      \texttt{height}: Height of the value box (default is ``150px'').
+    \end{itemize}
+  \item
+    \textbf{Functionality:}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The function constructs HTML elements using the provided parameters to create a custom value box.
+    \item
+      It uses the \texttt{shinydashboard} package's internal \texttt{tagAssert} function to assert that the \texttt{icon} is of type ``i.''
+    \item
+      The style is constructed based on the provided colors, width, and height.
+    \item
+      The \texttt{div} function is used to create the structure of the value box, including the main value, subtitle, and optional icon.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# custom value box function }
+
+\NormalTok{customValueBox }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{value =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{subtitle =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{icon =} \ConstantTok{NULL}\NormalTok{, color, background, }
+                           \AttributeTok{width =} \DecValTok{4}\NormalTok{, }\AttributeTok{height =} \StringTok{"150px"}\NormalTok{)\{}
+  
+  \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(icon))}
+\NormalTok{    shinydashboard}\SpecialCharTok{:::}\FunctionTok{tagAssert}\NormalTok{(icon, }\AttributeTok{type =} \StringTok{"i"}\NormalTok{)}
+  
+\NormalTok{  style }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"color: "}\NormalTok{, color, }\StringTok{"; background{-}color: "}\NormalTok{, background, }\StringTok{";"}\NormalTok{,}
+                  \StringTok{"width: "}\NormalTok{,width,  }\StringTok{";"}\NormalTok{, }\StringTok{"height: "}\NormalTok{, height)}
+  
+\NormalTok{  boxContent }\OtherTok{\textless{}{-}} \FunctionTok{div}\NormalTok{(}
+    \AttributeTok{class =} \StringTok{"small{-}box"}\NormalTok{, }\AttributeTok{style =}\NormalTok{ style,}
+    \FunctionTok{div}\NormalTok{(}
+      \AttributeTok{class =} \StringTok{"inner"}\NormalTok{,}
+      \FunctionTok{h4}\NormalTok{(value),}
+      \FunctionTok{p}\NormalTok{(subtitle)}
+\NormalTok{    ),}
+    \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(icon)) }\FunctionTok{div}\NormalTok{(}\AttributeTok{class =} \StringTok{"icon{-}large"}\NormalTok{, icon)}
+\NormalTok{  )}
+  
+  \FunctionTok{div}\NormalTok{(}
+    \AttributeTok{class =} \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(width)) }\FunctionTok{paste0}\NormalTok{(}\StringTok{"col{-}sm{-}"}\NormalTok{, width), }
+\NormalTok{    boxContent}
+\NormalTok{  )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{\texttt{valuebox\_server} Function:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Purpose:} This function serves as the server logic for the value box module.
+  \item
+    \textbf{Parameters:}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{id}: A unique identifier for the value box.
+    \item
+      Other parameters are passed to the \texttt{customValueBox} function.
+    \end{itemize}
+  \item
+    \textbf{Functionality:}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      It uses the \texttt{moduleServer} function to define a Shiny module.
+    \item
+      The \texttt{renderValueBox} function is used to render the value box based on the inputs.
+    \item
+      The \texttt{customValueBox} function is called with the provided parameters.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# valuebox module server function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{valuebox\_server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(id, value, subtitle, icon, color, background, }
+                            \AttributeTok{width =} \DecValTok{4}\NormalTok{, }\AttributeTok{height =} \StringTok{"150px"}\NormalTok{)\{}
+  \FunctionTok{moduleServer}\NormalTok{(id, }\ControlFlowTok{function}\NormalTok{(input, output, session)\{}
+\NormalTok{    output}\SpecialCharTok{$}\NormalTok{vb }\OtherTok{\textless{}{-}} \FunctionTok{renderValueBox}\NormalTok{(\{}
+      \FunctionTok{customValueBox}\NormalTok{(}
+        \AttributeTok{value =}\NormalTok{ value, }
+        \AttributeTok{subtitle =}\NormalTok{ subtitle,}
+        \AttributeTok{icon =}\NormalTok{ icon,}
+        \AttributeTok{background =}\NormalTok{ background,}
+        \AttributeTok{color =}\NormalTok{ color,}
+        \AttributeTok{width =}\NormalTok{ width,}
+        \AttributeTok{height =}\NormalTok{ height}
+\NormalTok{      )}
+\NormalTok{    \})}
+\NormalTok{  \})}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Usage Example:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    To use this module in a Shiny application, you would call the \texttt{valuebox\_server} function in the server part of your Shiny app and use \texttt{valueBoxOutput} in the UI part.
+  \item
+    Example:
+  \end{itemize}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{     output}\SpecialCharTok{$}\NormalTok{myValueBox }\OtherTok{\textless{}{-}} \FunctionTok{valuebox\_server}\NormalTok{(}
+       \AttributeTok{id =} \StringTok{"myValueBox"}\NormalTok{,}
+       \AttributeTok{value =} \DecValTok{42}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Answer to the Ultimate Question of Life, the Universe, and Everything"}\NormalTok{,}
+       \AttributeTok{icon =} \FunctionTok{icon}\NormalTok{(}\StringTok{"star"}\NormalTok{),}
+       \AttributeTok{color =} \StringTok{"blue"}\NormalTok{,}
+       \AttributeTok{background =} \StringTok{"lightblue"}\NormalTok{,}
+       \AttributeTok{width =} \DecValTok{4}\NormalTok{,}
+       \AttributeTok{height =} \StringTok{"150px"}
+\NormalTok{     )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tab-about}{%
+\section{Tab About}\label{tab-about}}
+
+Here the server side of the valueboxes that are in the Tab\_About UI are made and we use the paragraphs from the Tab\_About.R;
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# from Tab\_About.R }
+
+\CommentTok{\# Descriptions for server side valueboxes}
+
+\CommentTok{\# ABI score descriptions}
+\NormalTok{par\_s\_h }\OtherTok{\textless{}{-}} \StringTok{"Description of species and habitat score."}
+
+\NormalTok{par\_area }\OtherTok{\textless{}{-}} \StringTok{"Description of area managed for biodiversity score"}
+
+\NormalTok{par\_engage }\OtherTok{\textless{}{-}} \StringTok{"Description of biodiversity engagement score."}
+
+\CommentTok{\# BBI score descriptions}
+\NormalTok{par\_m\_s }\OtherTok{\textless{}{-}} \StringTok{"Description of mean species richness per hectare."}
+
+\NormalTok{par\_l\_s }\OtherTok{\textless{}{-}} \StringTok{"Description of local species richness per hectare."}
+
+\NormalTok{par\_fife }\OtherTok{\textless{}{-}} \StringTok{"Description of Fife species richness per hectare."}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{ABI Descriptions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{S\_H\_about }\OtherTok{\textless{}{-}} \FunctionTok{valuebox\_server}\NormalTok{(}
+  \AttributeTok{id =} \StringTok{"S\_H\_about"}\NormalTok{,}
+  \AttributeTok{subtitle =} \FunctionTok{paste}\NormalTok{(par\_s\_h),}
+  \AttributeTok{value =} \StringTok{"Species and Habitat Score"}\NormalTok{,}
+  \AttributeTok{background =} \StringTok{"lightgray"}\NormalTok{,}
+  \AttributeTok{color =} \StringTok{"black"}\NormalTok{,}
+  \AttributeTok{icon =} \ConstantTok{NULL}
+\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  \texttt{output\$S\_H\_about} is a Shiny output element using the \texttt{valuebox\_server} function. It displays a box containing a title, subtitle, and value.
+\item
+  \texttt{id}: A unique identifier for the box.
+\item
+  \texttt{subtitle}: The text displayed below the title, extracted from a reactive variable (\texttt{par\_s\_h}).
+\item
+  \texttt{value}: The main content of the box, indicating ``Species and Habitat Score.''
+\item
+  Other parameters set the background color, text color, and icon (none in this case).
+\end{itemize}
+
+\textbf{More ABI Descriptions:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{area\_about }\OtherTok{\textless{}{-}} \FunctionTok{valuebox\_server}\NormalTok{(}
+  \AttributeTok{id =} \StringTok{"area\_about"}\NormalTok{,}
+  \AttributeTok{subtitle =} \FunctionTok{paste}\NormalTok{(par\_l\_s),}
+  \AttributeTok{value =} \StringTok{"Area Score"}\NormalTok{,}
+  \AttributeTok{background =} \StringTok{"lightgray"}\NormalTok{,}
+  \AttributeTok{color =} \StringTok{"black"}\NormalTok{,}
+  \AttributeTok{icon =} \ConstantTok{NULL}
+\NormalTok{) }
+
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{engagement\_about }\OtherTok{\textless{}{-}} \FunctionTok{valuebox\_server}\NormalTok{(}
+  \AttributeTok{id =} \StringTok{"engagement\_about"}\NormalTok{,}
+  \AttributeTok{subtitle =} \FunctionTok{paste}\NormalTok{(par\_engage),}
+  \AttributeTok{value =} \StringTok{"Engagement Score"}\NormalTok{,}
+  \AttributeTok{background =} \StringTok{"lightgray"}\NormalTok{,}
+  \AttributeTok{color =} \StringTok{"black"}\NormalTok{,}
+  \AttributeTok{icon =} \ConstantTok{NULL}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{itemize}
 \tightlist
 \item
-  This \texttt{observeEvent} block reacts to changes in the selected year (\texttt{input\$year}). It updates the choices in the student dropdown menu (\texttt{student\_select}) with \texttt{student\_names()}.
+  Similar to the previous example, these \texttt{valuebox\_server} outputs display descriptions for different components of the Annual Biodiversity Index (ABI).
 \end{itemize}
 
-In summary, this Shiny server code dynamically updates and subsets data based on the user's selected year. It also prepares reactive expressions for taxa and student names, updating dropdown menus accordingly in the Taxa Explorer and Student Engagement tabs.
+\textbf{BBI Descriptions:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{MS\_about }\OtherTok{\textless{}{-}} \FunctionTok{valuebox\_server}\NormalTok{(}
+  \AttributeTok{id =} \StringTok{"MS\_about"}\NormalTok{,}
+  \AttributeTok{subtitle =} \FunctionTok{paste}\NormalTok{(par\_m\_s),}
+  \AttributeTok{value =} \StringTok{"Local species score per hectare"}\NormalTok{,}
+  \AttributeTok{background =} \StringTok{"lightgray"}\NormalTok{,}
+  \AttributeTok{color =} \StringTok{"black"}\NormalTok{,}
+  \AttributeTok{icon =} \ConstantTok{NULL}
+\NormalTok{)}
+
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{fife\_about }\OtherTok{\textless{}{-}} \FunctionTok{valuebox\_server}\NormalTok{(}
+  \AttributeTok{id =} \StringTok{"fife\_about"}\NormalTok{,}
+  \AttributeTok{subtitle =} \FunctionTok{paste}\NormalTok{(par\_fife),}
+  \AttributeTok{value =} \StringTok{"Local species score per hectare"}\NormalTok{,}
+  \AttributeTok{background =} \StringTok{"lightgray"}\NormalTok{,}
+  \AttributeTok{color =} \StringTok{"black"}\NormalTok{,}
+  \AttributeTok{icon =} \ConstantTok{NULL}
+\NormalTok{)}
+
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{local\_about }\OtherTok{\textless{}{-}} \FunctionTok{valuebox\_server}\NormalTok{(}
+  \AttributeTok{id =} \StringTok{"local\_about"}\NormalTok{,}
+  \AttributeTok{icon =} \ConstantTok{NULL}\NormalTok{,}
+  \AttributeTok{subtitle =} \FunctionTok{paste}\NormalTok{(par\_l\_s),}
+  \AttributeTok{value =} \StringTok{"Local species score per hectare"}\NormalTok{,}
+  \AttributeTok{background =} \StringTok{"lightgray"}\NormalTok{,}
+  \AttributeTok{color =} \StringTok{"black"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  These \texttt{valuebox\_server} outputs display descriptions for different components of the Benchmark Biodiversity Index (BBI).
+\end{itemize}
+
+\textbf{Summary:}
+This server code defines logic to render images and display descriptions for the ``About'' tab of a Shiny application. The images include group photos, and the descriptions provide information about various biodiversity indices and scores. The data for these descriptions seems to come from reactive variables like \texttt{par\_s\_h}, \texttt{par\_l\_s}, \texttt{par\_engage}, \texttt{par\_m\_s}, and \texttt{par\_fife}.
+
+\hypertarget{tab-kpi}{%
+\section{Tab KPI}\label{tab-kpi}}
+
+This R Shiny server code is associated with the ``Key Performance Indices'' tab (TAB 1). More valueboxes are created! And the server logic for the two graphs are created. The first one is always displayed, the second is only displayed when the year selected is not the first year.
+
+\textbf{ABI Plot (Bar Plot):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{   output}\SpecialCharTok{$}\NormalTok{taxa\_bar }\OtherTok{\textless{}{-}} \FunctionTok{renderPlotly}\NormalTok{(\{}
+     \CommentTok{\# Data manipulation to get species count per Taxa}
+\NormalTok{     df }\OtherTok{\textless{}{-}} \FunctionTok{survey\_data}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+       \FunctionTok{group\_by}\NormalTok{(Taxa) }\SpecialCharTok{\%\textgreater{}\%}
+       \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Count =} \FunctionTok{n\_distinct}\NormalTok{(Species))}
+
+     \CommentTok{\# Plotting using ggplot2 and converting it to Plotly}
+     \FunctionTok{ggplotly}\NormalTok{(}
+       \FunctionTok{ggplot}\NormalTok{(df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Taxa, }\SpecialCharTok{{-}}\NormalTok{Count), }\AttributeTok{y =}\NormalTok{ Count)) }\SpecialCharTok{+}
+         \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"\#028E9D"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+         \FunctionTok{labs}\NormalTok{(}
+           \AttributeTok{x =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Taxa"}\NormalTok{,}
+           \AttributeTok{y =} \StringTok{"Number of Species}\SpecialCharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{         ) }\SpecialCharTok{+}
+         \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+         \FunctionTok{theme}\NormalTok{(}
+           \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{),}
+           \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{         ),}
+       \AttributeTok{tooltip =} \StringTok{"y"}
+\NormalTok{     )}
+\NormalTok{   \})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  Within the \texttt{renderPlotly} function we group the data by taxa and count the number of unique species with tidyverse logic. This is then stored in an object called \texttt{df}. This occurs within the function, so it can only be used within the function.
+\item
+  The \texttt{renderPlotly} function generates the plot based on the species count data and uses the \texttt{ggplotly} function to convert the ggplot2 plot to a Plotly interactive plot.
+\end{itemize}
+
+\textbf{Example Plot for Change (CBI):}
+
+An example plot is provided for the Change Biodiversity Index (CBI). This plot is only shown when the selected year is not the first year (2022/2023).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{   output}\SpecialCharTok{$}\NormalTok{example\_plot }\OtherTok{\textless{}{-}}\NormalTok{ output}\SpecialCharTok{$}\NormalTok{species\_bar }\OtherTok{\textless{}{-}} \FunctionTok{renderPlotly}\NormalTok{(\{}
+     \CommentTok{\# Example data for CBI plot}
+\NormalTok{     example\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+       \AttributeTok{Year =} \FunctionTok{c}\NormalTok{(}\StringTok{"2022/2023"}\NormalTok{, }\StringTok{"2023/2024"}\NormalTok{),}
+       \AttributeTok{CBI =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{89}\NormalTok{)}
+\NormalTok{     )}
+
+     \CommentTok{\# Creating a ggplot2 plot and converting it to Plotly}
+     \FunctionTok{ggplotly}\NormalTok{(}
+       \FunctionTok{ggplot}\NormalTok{(example\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year, }\AttributeTok{y =}\NormalTok{ CBI)) }\SpecialCharTok{+}
+         \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{colour =} \StringTok{"\#068D9D"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+         \FunctionTok{labs}\NormalTok{(}
+           \AttributeTok{x =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Year"}\NormalTok{,}
+           \AttributeTok{y =} \StringTok{"CBI}\SpecialCharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{         ) }\SpecialCharTok{+}
+         \FunctionTok{theme\_light}\NormalTok{() }\SpecialCharTok{+}
+         \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)),}
+       \AttributeTok{tooltip =} \FunctionTok{c}\NormalTok{(}\StringTok{"y"}\NormalTok{)}
+\NormalTok{     )}
+\NormalTok{   \})}
+\end{Highlighting}
+\end{Shaded}
+
+This plot serves as an example for the Change Biodiversity Index, providing a visual representation of the CBI values across different years.
+
+\hypertarget{tab-taxa-explorer}{%
+\section{Tab Taxa Explorer}\label{tab-taxa-explorer}}
+
+Using the reactive dataframe \texttt{survey\_data}, we make a new reactive dataframe that is filtered for the selected taxa and selects certain columns:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\# Create a reactive dataframe \textquotesingle{}df\textquotesingle{} based on the selected taxa from the input.}
+  \CommentTok{\# This dataframe filters the \textquotesingle{}survey\_data()\textquotesingle{} by the selected taxa and selects specific columns.}
+\NormalTok{  taxa\_df }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(\{}
+    \FunctionTok{survey\_data}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{filter}\NormalTok{(Taxa }\SpecialCharTok{==}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{taxa\_select) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{select}\NormalTok{(Species, Count, Observer, Date, PhotoID, geometry)}
+\NormalTok{  \})}
+\end{Highlighting}
+\end{Shaded}
+
+The new reactive daaframe \texttt{taxa\_df} is then used throughout the server code for this tab.
+
+This R Shiny server code is associated with the ``Taxa Explorer'' tab (TAB 2) in a Shiny application. The purpose of this tab is to explore details related to a specific taxonomic group (Taxa). Let's break down the code:
+
+\textbf{Pie Chart (Species Distribution):}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{output\$species\_pie}: Renders a pie chart showing the distribution of species for the selected taxa. The chart displays the top 10 species based on their count.
+\end{itemize}
+
+\textbf{Value Boxes:}
+
+\begin{itemize}
+\item
+  \texttt{output\$num\_species\_taxa}: Renders a value box showing the number of distinct species for the selected taxa. The icon changes based on the selected taxa.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A mapping between taxa names and icons is created.
+  \item
+    When a taxa is selected in the Shiny application, it looks up the corresponding icon for that taxa from the icon\_map.
+  \item
+    If there is no specific icon for the selected taxa, it defaults to using the ``leaf'' icon.
+  \end{itemize}
+\item
+  \texttt{output\$num\_records\_taxa}: Renders a value box showing the total number of records for the selected taxa.
+\item
+  \texttt{output\$top\_obs}: Renders a value box highlighting the top observer based on the number of records for the selected taxa.
+\end{itemize}
+
+\textbf{Bar Graph of Species Records:}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{output\$species\_bar}: Renders a bar graph showing the number of records for the top 50 species based on the count.
+\end{itemize}
+
+\textbf{Data Tables:}
+
+\begin{itemize}
+\item
+  \texttt{output\$taxa\_table}: Renders a data table displaying all records for the selected taxa.
+\item
+  \texttt{output\$species\_list}: Renders a data table listing species and their respective number of records, sorted in descending order.
+\item
+  The datatables use the \texttt{table\_options} defined in global.R.
+\end{itemize}
+
+\textbf{Leaflet Map:}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{output\$MapPlot1}: Renders a Leaflet map displaying the locations of species occurrences for the selected taxa.
+\end{itemize}
+
+\textbf{Modal for Record Photo:}
+
+\begin{itemize}
+\tightlist
+\item
+  Dynamically generates a modal UI for displaying the photo of a selected record when a row is selected in the data table. The modal includes an image and a close button. This could have been done with in built functions: \url{https://shiny.posit.co/r/reference/shiny/1.7.3/modaldialog} but I wanted more control over the functionality and the way images were displaying. The code runs JavaScript code using the \texttt{shinyjs} package. I used ChatGPT to help with code! The same logic is used for displaying a modal in the Student Engagement tab.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{\texttt{observeEvent(input\$taxa\_table\_rows\_selected,\ \{...\})}:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This observer is triggered when the user selects a row in the data table with the id \texttt{taxa\_table}.
+  \item
+    \texttt{input\$taxa\_table\_rows\_selected} contains the indices of the selected rows.
+  \item
+    The observer extracts the \texttt{PhotoID} associated with the selected row from the \texttt{taxa\_df()} (assuming there is a reactive dataframe named \texttt{taxa\_df()}).
+  \item
+    If a valid \texttt{PhotoID} is found, it enables the modal, shows it, and sets the source (\texttt{src}) attribute of the image (\texttt{modalImage\_taxa}) to the selected photo.
+  \end{itemize}
+\item
+  \textbf{\texttt{output\$Modal\_taxa\ \textless{}-\ renderUI(\{...\})}:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This is a dynamic UI element for rendering the modal. It is a Fluid Page containing a div with the id \texttt{customModal} and additional styling.
+  \item
+    Inside the modal, there is another div (\texttt{modalContent}) that contains an \texttt{h4} element with the title ``Record Photo,'' an image (\texttt{modalImage\_taxa}), and a close button (\texttt{closeModalBtn\_taxa}).
+  \item
+    The \texttt{modalImage\_taxa} has a dynamic source (\texttt{src}) that will be set by the JavaScript code when a row is selected.
+  \end{itemize}
+\item
+  \textbf{\texttt{observeEvent(input\$closeModalBtn\_taxa,\ \{...\})}:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This observer is triggered when the user clicks the ``Close Modal'' button.
+  \item
+    It runs JavaScript code to hide the modal (\texttt{\$("\#customModal").hide();}).
+  \end{itemize}
+\end{enumerate}
+
+In summary, when a user selects a row in the data table, the associated photo is displayed in a modal. The modal is dynamically generated with the \texttt{renderUI} function, and it includes an image and a button to close the modal. The JavaScript code (\texttt{shinyjs::runjs}) is used to control the display and hiding of the modal.
+
+\hypertarget{tab-student-engagement}{%
+\section{Tab Student Engagement}\label{tab-student-engagement}}
+
+You'll find a lot of similar code here, icnluding datatables, valueboxes, plotly plot and the custom modal. The first few lines of code are new though:
+
+\textbf{1. Student Heading}
+
+First, the student heading is created and dynamically changes based on which student is selected using \texttt{input\$student\_select}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\# Heading for the student engagement section}
+  \CommentTok{\# This will dynamically display the name of the selected student followed by "Biodiversity Data"}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{student\_heading }\OtherTok{\textless{}{-}} \FunctionTok{renderText}\NormalTok{(\{}
+    \FunctionTok{paste}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{student\_select, }\StringTok{"\textquotesingle{}s Biodiversity Data"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  \})}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{2. About me section}
+
+Then the ``about\_me'' descriptions that the student wrote is pasted. If no paragraph is found, nothing (\texttt{""}) is displayed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Description for the student engagement section}
+\CommentTok{\# This fetches a description paragraph related to the selected student from the \textquotesingle{}student\_text\_sep\textquotesingle{} dataset}
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{student\_description }\OtherTok{\textless{}{-}} \FunctionTok{renderText}\NormalTok{(\{}
+  \CommentTok{\# Get the selected student from the input}
+\NormalTok{  search\_word }\OtherTok{\textless{}{-}}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{student\_select}
+  
+  \CommentTok{\# Find the index of the first occurrence of the selected student\textquotesingle{}s name in student\_text\_sep}
+\NormalTok{  search\_paragraph }\OtherTok{\textless{}{-}} \FunctionTok{grep}\NormalTok{(search\_word, student\_text\_sep)[}\DecValTok{1}\NormalTok{]}
+  
+  \CommentTok{\# Extract the relevant paragraph based on the found index}
+\NormalTok{  description }\OtherTok{\textless{}{-}}\NormalTok{ student\_text\_sep[search\_paragraph]}
+  
+  \CommentTok{\# If the student has not given a description, return a blank string}
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{is.na}\NormalTok{(description)) \{}
+\NormalTok{    description }\OtherTok{\textless{}{-}} \StringTok{""}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    description}
+\NormalTok{  \}}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  \texttt{output\$student\_description\ \textless{}-\ renderText(\{\ ...\ \})}: This sets up a reactive output element called \texttt{student\_description}. The content of this output is generated dynamically based on the selected student's name.
+\item
+  \texttt{search\_word\ \textless{}-\ input\$student\_select}: It gets the selected student's name from the \texttt{student\_select} input.
+\item
+  \texttt{search\_paragraph\ \textless{}-\ grep(search\_word,\ student\_text\_sep){[}1{]}}: This finds the index of the first occurrence of the selected student's name in the \texttt{student\_text\_sep} dataset. The \texttt{grep} function is used for pattern matching, and \texttt{{[}1{]}} is used to get the first match.
+\item
+  \texttt{description\ \textless{}-\ student\_text\_sep{[}search\_paragraph{]}}: This extracts the relevant paragraph from the \texttt{student\_text\_sep} dataset based on the found index.
+\item
+  \texttt{if\ (is.na(description))\ \{\ description\ \textless{}-\ ""\ \}\ else\ \{\ description\ \}}: This checks if the student has given a description. If the description is missing (\texttt{NA}), it sets \texttt{description} to an empty string. Otherwise, it leaves \texttt{description} unchanged.
+\item
+  The final \texttt{description} variable is then returned, and it will be displayed in the UI as the text content for the student engagement section. If the student has not provided a description, an empty string will be displayed.
+\end{itemize}
+
+\textbf{3. Student Photo}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Display photo of the selected student}
+\CommentTok{\# This dynamically fetches the photo based on the selected student\textquotesingle{}s name}
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{photoOutput }\OtherTok{\textless{}{-}} \FunctionTok{renderUI}\NormalTok{(\{}
+\NormalTok{  name }\OtherTok{\textless{}{-}}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{student\_select}
+  
+  \CommentTok{\# Check if a photo file exists for the selected student}
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{file.exists}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"www/Team\_Data/"}\NormalTok{, name, }\StringTok{".jpg"}\NormalTok{))) \{}
+    \CommentTok{\# If a photo exists, create an HTML div with an img tag}
+\NormalTok{    photo }\OtherTok{\textless{}{-}}\NormalTok{ tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Team\_Data/"}\NormalTok{, name, }\StringTok{".jpg"}\NormalTok{), }\AttributeTok{height =} \StringTok{"100px"}\NormalTok{, }\AttributeTok{style =} \StringTok{"margin{-}right: 10px; border{-}radius: 30px;"}\NormalTok{)}
+\NormalTok{    )}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \CommentTok{\# If no photo exists, create an HTML div with a user{-}secret icon}
+\NormalTok{    photo }\OtherTok{\textless{}{-}}\NormalTok{ tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+      \FunctionTok{icon}\NormalTok{(}\StringTok{"user{-}secret"}\NormalTok{, }\AttributeTok{style =} \StringTok{"margin{-}right: 10px; font{-}size: 50px"}\NormalTok{)}
+\NormalTok{    )}
+\NormalTok{  \}}
+  
+  \CommentTok{\# Return the created HTML div}
+\NormalTok{  photo}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  \texttt{output\$photoOutput\ \textless{}-\ renderUI(\{\ ...\ \})}: This sets up a reactive UI element called \texttt{photoOutput}. The content of this UI element is generated dynamically based on the selected student's name.
+\item
+  \texttt{name\ \textless{}-\ input\$student\_select}: It gets the selected student's name from the \texttt{student\_select} input.
+\item
+  \texttt{file.exists(paste0("www/Team\_Data/",\ name,\ ".jpg"))}: This checks if a photo file exists for the selected student. It constructs the file path based on the name and checks if the file exists.
+\item
+  If a photo exists (\texttt{if} branch):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{photo\ \textless{}-\ tags\$div(...)} creates an HTML div element.
+  \item
+    \texttt{tags\$img(...)} creates an img tag within the div, setting its source (\texttt{src} attribute) to the path of the photo file.
+  \item
+    Additional styling is applied with \texttt{height}, \texttt{style} attributes.
+  \end{itemize}
+\item
+  If no photo exists (\texttt{else} branch):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{photo\ \textless{}-\ tags\$div(...)} creates an HTML div element.
+  \item
+    \texttt{icon("user-secret",\ style\ =\ "margin-right:\ 10px;\ font-size:\ 50px")} creates an icon with a user-secret icon from the \texttt{shiny} package, providing additional styling.
+  \end{itemize}
+\item
+  \texttt{photo}: The final variable \texttt{photo} contains the dynamically generated HTML content (either an image or an icon).
+\item
+  The entire \texttt{photo} variable is then returned, and this UI element will display either the photo of the selected student or a user-secret icon if no photo is found.
+\end{itemize}
+
+\hypertarget{tab-record-finder}{%
+\section{Tab Record Finder}\label{tab-record-finder}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{observeEvent}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{viewButton, \{}
+  \CommentTok{\# Remove trailing space from PhotoID input}
+\NormalTok{  cleaned\_photo\_id }\OtherTok{\textless{}{-}} \FunctionTok{str\_trim}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{PhotoID, }\AttributeTok{side =} \StringTok{"right"}\NormalTok{)}
+\NormalTok{  filename }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"www/"}\NormalTok{, cleaned\_photo\_id)}
+
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{file.exists}\NormalTok{(filename)) \{}
+\NormalTok{    output}\SpecialCharTok{$}\NormalTok{imageOutput }\OtherTok{\textless{}{-}} \FunctionTok{renderUI}\NormalTok{(\{}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+        \AttributeTok{class =} \StringTok{"record\_image"}\NormalTok{,}
+\NormalTok{        tags}\SpecialCharTok{$}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{PhotoID), }\AttributeTok{style =} \StringTok{"display: block; max{-}width: 100\%; max{-}height: 50vh"}\NormalTok{),}
+\NormalTok{      )}
+\NormalTok{    \})}
+    \FunctionTok{toggle}\NormalTok{(}\StringTok{"imageOutput"}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{\texttt{observeEvent(input\$viewButton,\ \{...\})}:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This observer is triggered when the button with the id \texttt{viewButton} is clicked.
+  \end{itemize}
+\item
+  \textbf{Image Loading Logic:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{cleaned\_photo\_id\ \textless{}-\ str\_trim(input\$PhotoID,\ side\ =\ "right")}: Removes trailing spaces from the input \texttt{PhotoID}.
+  \item
+    \texttt{filename\ \textless{}-\ paste0("www/",\ cleaned\_photo\_id)}: Creates the file path for the image using the cleaned \texttt{PhotoID}.
+  \item
+    \texttt{if\ (file.exists(filename))\ \{\ ...\ \}}: Checks if the file exists in the specified path.
+  \end{itemize}
+\item
+  \textbf{UI Rendering:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If the file exists, it renders a dynamic UI (\texttt{output\$imageOutput}) containing an image (\texttt{tags\$img}) with the source set to the specified \texttt{PhotoID}. The image is styled to have a maximum width of 100\% and a maximum height of 50vh (50\% of the viewport height).
+  \item
+    \texttt{toggle("imageOutput")}: This is likely a custom function to toggle the visibility of the image.
+  \end{itemize}
+\end{enumerate}
 
 \hypertarget{next-steps}{%
 \chapter{Next Steps}\label{next-steps}}
 
 Here is a list of things that need to be done:
+
+\hypertarget{error-message-record-finder}{%
+\section{Error message Record Finder}\label{error-message-record-finder}}
+
+If the photo ID is incorrect, an error message should be displayed.
 
 \hypertarget{different-years-different-data}{%
 \section{Different years different data:}\label{different-years-different-data}}
