@@ -2,6 +2,14 @@
 
 Here is a list of things that need to be done: 
 
+## Shinyapps.io 
+
+Who will host it? Might be better for Will or group account - update after big changes etc. Or perhaps set up github repo and data manager can push and pull. 
+
+## Record Finder Photos
+
+Have images update every time the tab is clicked. 
+
 ## Error message Record Finder
 
 If the photo ID is incorrect, an error message should be displayed. 
@@ -10,7 +18,6 @@ If the photo ID is incorrect, an error message should be displayed.
 
 Currently, the dashboard works a dataset containing data for multiple years - I created a fake dataset for the next academic year as a subset of the 2023 data. The data is combined into the all_years.RData. It might be better to have separate datasets and store them in a list, its up to you. The next point will influence this too. 
 
-
 ## Data download and clean automation: 
 
 The pulling and preparing of the data should be made automatic, i.e. everyday during the survey season the data should be pulled from OneDrive, cleaned and uploaded to the dashboard. However, as more data is collected it will probably be better to upload the data to OneDrive (i.e. not host it on your laptop or shiny server) and have the dashboard pull the data from OneDrive. This will also affect how the dashboard accesses separate years data. 
@@ -18,6 +25,10 @@ The pulling and preparing of the data should be made automatic, i.e. everyday du
 ## Survey Photos:
 
 The same also applies to the photos. It might be better to pull the photos directly from OneDrive in the app. I'm not sure how to do this and maybe there's a different way to store and retrieve the photos. 
+
+## BIG THING, requires shiny knowledge:
+
+Coding testing structures. Unit testing, end-to-end and performance test. 
 
 
 

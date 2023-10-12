@@ -54,7 +54,7 @@ Here are key concepts related to Shiny reactive expressions:
      input$text_input
    })
    ```
-
+   
 ### 7. **Use Cases:**
    - **Complex Computations:** Reactive expressions are useful for encapsulating complex computations that depend on reactive inputs.
    - **Preventing Redundant Calculations:** They help prevent redundant calculations by only recomputing when their dependencies change.
