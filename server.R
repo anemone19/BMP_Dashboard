@@ -54,31 +54,6 @@ server <- function(input, output, session) {
 
   # TAB 0: ABOUT ----------------------------------------------------------------------
 
-  # group photos
-  output$groupPhoto1 <- renderImage(
-    {
-      list(
-        src = "www/Team_Data/group_photo.jpeg",
-        alt = "Image description",
-        width = "50px", # Set the width as needed
-        height = "50px" # Maintain the aspect ratio
-      )
-    },
-    deleteFile = FALSE
-  )
-
-  output$groupPhoto2 <- renderImage(
-    {
-      list(
-        src = "www/Team_Data/group_photo2.jpeg",
-        alt = "Image description",
-        width = "100%", # Set the width as needed
-        height = "auto" # Maintain the aspect ratio
-      )
-    },
-    deleteFile = FALSE
-  )
-
   # ABI descriptions
   # Value boxes for displaying the descriptions of the three KPIs
   
@@ -261,13 +236,13 @@ server <- function(input, output, session) {
   # TAB 2: TAXA EXPLORER -------------------------------------------------------------------
 
   # Render and display the selected taxa name followed by " Explorer" as a heading in the UI.
-  output$taxa_heading <- renderText({
-    paste(input$taxa_select, " Explorer", sep = "")
-  })
+  # output$taxa_heading <- renderText({
+  #   paste(input$taxa_select, " Explorer", sep = "")
+  # })
 
   # Create a reactive dataframe 'df' based on the selected taxa from the input.
   # This dataframe filters the 'survey_data()' by the selected taxa and selects specific columns.
-  df <- reactive({
+  taxa_df <- reactive({
     survey_data() %>%
       filter(Taxa == input$taxa_select) %>%
       select(Species, Count, Observer, Date, PhotoID, geometry)
@@ -276,14 +251,14 @@ server <- function(input, output, session) {
   # Render a pie chart showing the distribution of species.
   # The chart displays the top 10 species based on their count.
   output$species_pie <- renderPlot({
+    
     # Group by species, calculate the count and percentage for each species.
-
-    pie <- df() %>%
+    pie <- taxa_df() %>%
       group_by(Species) %>%
-      summarise(Value = n()) %>%
-      mutate(Percent = Value / sum(Value)) %>%
-      arrange(desc(Value)) %>%
-      slice(1:10)
+      summarise(Value = n()) %>% # count number of entries for each species
+      mutate(Percent = Value / sum(Value)) %>% # calculate percentage 
+      arrange(desc(Value)) %>% # arrange from highest to lowest
+      slice(1:10) # take top 10 
 
     # Convert Species to a factor for plotting.
     pie$Species <- factor(pie$Species, levels = (as.character(pie$Species)))
@@ -319,7 +294,7 @@ server <- function(input, output, session) {
 
     # Display the value box with the number of distinct species and the determined icon.
     customValueBox(
-      value = paste(n_distinct(df()$Species)),
+      value = paste(n_distinct(taxa_df()$Species)),
       subtitle = "Species recorded",
       icon = icon(icon_taxa, style = "font-size: 50px"),
       background = "#D9DBF1",
@@ -330,7 +305,7 @@ server <- function(input, output, session) {
 
   # Render a value box showing the total number of records for the selected taxa.
   output$num_records_taxa <- renderValueBox({customValueBox(
-      value = nrow(df()),
+      value = nrow(taxa_df()),
       subtitle = "Records collected",
       icon = icon("clipboard", style = "font-size: 50px"),
       background = "#D9DBF1",
@@ -342,13 +317,15 @@ server <- function(input, output, session) {
   # Render a value box highlighting the top observer based on the number of records.
   output$top_obs <- renderValueBox({
     # Group by observer, calculate the number of records for each observer, and sort in descending order.
-    observer_list <- df() %>%
+    observer_list <- taxa_df() %>%
       group_by(Observer) %>%
-      summarise(Num_Records = n()) %>%
-      arrange(desc(Num_Records))
-
+      summarise(Num_Records = n()) %>% # number of records per student
+      arrange(desc(Num_Records)) # arrange in descending order
+  
+    #  observer_list$Num_Records[1] extracts the name of the top observer 
+    
     customValueBox(observer_list$Observer[1],
-      subtitle = paste("is the top observer with", observer_list$Num_Records[1], "records!"),
+      subtitle = paste("is the top observer with", observer_list$Num_Records[1], "records!"), 
       icon = icon("trophy", style = "font-size: 50px"),
       background = "#D9DBF1",
       color = "black",
@@ -359,8 +336,9 @@ server <- function(input, output, session) {
   # Bar graph of number of records of species
   # This graph displays the top 50 species based on the number of records
   output$species_bar <- renderPlotly({
-    df_plot <- df() %>%
-      count(Species, sort = TRUE) %>%
+    
+    df_plot <- taxa_df() %>%
+      count(Species, sort = TRUE) %>%  
       rename(Count = n) %>%
       slice_max(n = 50, order_by = Count) # Selecting top 50 species based on count
 
@@ -381,7 +359,7 @@ server <- function(input, output, session) {
   # Records datatable
   # This data table displays all records from the dataset
   output$taxa_table <- DT::renderDT({
-    df() %>%
+    taxa_df() %>% select(-geometry)%>%
       DT::datatable(
         options = table_options(),
         selection = "single" # has to be outside out options
@@ -393,7 +371,7 @@ server <- function(input, output, session) {
 
   observeEvent(input$taxa_table_rows_selected, {
     selected_row <- input$taxa_table_rows_selected
-    selected_photo <- df()[selected_row, ]$PhotoID
+    selected_photo <- taxa_df()[selected_row, ]$PhotoID
 
     if (!is.na(selected_photo)) {
       shinyjs::enable("customModal")
@@ -441,7 +419,7 @@ server <- function(input, output, session) {
   # Species list datatable
   # This data table lists species and their respective number of records, sorted in descending order
   output$species_list <- DT::renderDT({
-    species_list <- df() %>%
+    species_list <- taxa_df() %>%
       group_by(Species) %>%
       summarise(Num_Records = n()) %>%
       arrange(desc(Num_Records)) # Sorting by number of records in descending order
@@ -701,10 +679,11 @@ server <- function(input, output, session) {
 
     if (file.exists(filename)) {
       output$imageOutput <- renderUI({
-        div <- tags$div(
-          tags$img(src = paste(input$PhotoID), style = "display: block; max-width: auto; max-height: 50vh; margin: auto")
+        tags$div(
+          class = "record_image",
+          tags$img(src = paste(input$PhotoID), style = "display: block; max-width: 100%; max-height: 50vh"),
         )
-        div
+        
       })
       toggle("imageOutput")
     }

@@ -1,3 +1,75 @@
-`r if (knitr::is_html_output()) '
-# References {-}
-'`
+
+# Useful things 
+
+## Reactive Expressions 
+
+In Shiny, a reactive expression is a way to create a dynamic and responsive relationship between inputs and outputs. Reactive expressions allow you to create computations that automatically update whenever their dependencies change. This enables real-time, reactive behavior in Shiny applications.
+
+Here are key concepts related to Shiny reactive expressions:
+
+### 1. **Reactivity:**
+   - **What is Reactivity?** Reactivity is the ability of a Shiny application to automatically respond to changes in input values, triggering updates to the corresponding output elements.
+
+### 2. **Understanding Reactive Expressions:**
+   - **Definition:** A reactive expression is a function that contains reactive dependencies. These dependencies are explicitly declared within the function body using reactive functions like `reactive()`, `observe()`, `eventReactive()`, etc.
+
+### 3. **Declaration of Reactive Expressions:**
+   - **`reactive()`:** The `reactive()` function is used to create a reactive expression. It takes a block of code as an argument, and within that block, you can declare reactive dependencies using reactive functions.
+
+   ```r
+   my_reactive_expression <- reactive({
+     # Code with reactive dependencies
+     input$some_input + input$another_input
+   })
+   ```
+
+### 4. **Dependency Tracking:**
+   - **Automatic Dependency Tracking:** When a reactive expression is created, Shiny automatically tracks the dependencies within the expression.
+   - **Reactive Functions:** Reactive functions, such as `input$`, `reactive()`, and others, signal to Shiny that the expression depends on the values they reference.
+
+### 5. **Use in Output Elements:**
+   - **Usage in Outputs:** Reactive expressions are commonly used in output elements. For example, you might use a reactive expression to calculate a plot based on user input and then render that plot in the UI.
+
+   ```r
+   output$my_plot <- renderPlot({
+     my_reactive_expression()
+   })
+   ```
+
+### 6. **Reactivity in `observe()` and `eventReactive()`:**
+   - **`observe()`:** The `observe()` function is used for operations that don't return a value but have side effects, like printing to the console or updating a reactiveValues object.
+
+   ```r
+   observe({
+     # Code with reactive dependencies
+     cat("Something happened!\n")
+   })
+   ```
+
+   - **`eventReactive()`:** The `eventReactive()` function is similar to `reactive()`, but it only updates when an event occurs.
+
+   ```r
+   reactive_result <- eventReactive(input$button_click, {
+     # Code with reactive dependencies
+     input$text_input
+   })
+   ```
+
+### 7. **Use Cases:**
+   - **Complex Computations:** Reactive expressions are useful for encapsulating complex computations that depend on reactive inputs.
+   - **Preventing Redundant Calculations:** They help prevent redundant calculations by only recomputing when their dependencies change.
+
+### 8. **Performance Considerations:**
+   - **Efficiency:** While reactive expressions provide a powerful way to create responsive applications, it's essential to be mindful of efficiency to prevent unnecessary computations.
+
+### 9. **Reactive Conductors:**
+   - **`reactiveVal()` and `reactiveValues()`:** These are used to create mutable reactive objects that can be read and modified in reactive contexts.
+
+### 10. **Isolation of Reactivity:**
+   - **`isolate()`:** In some cases, you may want to isolate certain expressions from reactivity to prevent undesired updates.
+
+   ```r
+   isolated_value <- isolate(input$some_input)
+   ```
+
+In summary, reactive expressions are a fundamental concept in Shiny programming, allowing you to create dynamic and responsive applications by specifying the dependencies between inputs and outputs. They play a crucial role in creating interactive and data-driven user interfaces.

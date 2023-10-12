@@ -4,12 +4,11 @@ knitr::opts_chunk$set(eval=FALSE)
 
 ```
 
-
 # UI
 
 ## ui.R
 
-Here we define the user interface (UI) for the dashboard. First we source the ui code for each of the tabs: 
+Here we define the user interface (UI) for the dashboard. First we source the ui code for each of the tabs:
 
 ```{r}
 
@@ -23,8 +22,8 @@ source("TabItems/Tab_Record_Finder.R")
 
 ```
 
-1. **Header Section (`dashboardHeader`):**
-   - Sets up the header of the dashboard with the title "Biodiversity Monitoring Programme."
+1.  **Header Section (`dashboardHeader`):**
+    -   Sets up the header of the dashboard with the title "Biodiversity Monitoring Programme."
 
 ```{r}
 # 1. HEADER ---------------------------------------------------------------------------------------------------
@@ -36,13 +35,11 @@ header <- dashboardHeader(
 
 ```
 
-
-2. **Sidebar Section (`dashboardSidebar`):**
-   - Creates a sidebar that contains a menu (`sidebarMenu`) with several items.
-   - It includes a dropdown (`selectInput`) for choosing the survey year.
-   - Menu items include "About," "Key Performance Indices," "Taxa Explorer," "Student Engagement," and "Record Finder."
-   - Conditional panels (`conditionalPanel`) show/hide additional input fields based on the selected menu item. For example, when "Taxa Explorer" is selected, a dropdown to select a taxa is displayed; when "Student Engagement" is selected, a dropdown to select a student is displayed.
-
+2.  **Sidebar Section (`dashboardSidebar`):**
+    -   Creates a sidebar that contains a menu (`sidebarMenu`) with several items.
+    -   It includes a dropdown (`selectInput`) for choosing the survey year.
+    -   Menu items include "About," "Key Performance Indices," "Taxa Explorer," "Student Engagement," and "Record Finder."
+    -   Conditional panels (`conditionalPanel`) show/hide additional input fields based on the selected menu item. For example, when "Taxa Explorer" is selected, a dropdown to select a taxa is displayed; when "Student Engagement" is selected, a dropdown to select a student is displayed.
 
 ```{r}
 
@@ -95,10 +92,10 @@ sidebar <- dashboardSidebar(
 
 ```
 
-3. **Body Section (`dashboardBody`):**
-   - Defines the main body of the dashboard.
-   - Utilizes the `dashboardBody` function and includes additional styling using `tags$head` to link an external stylesheet (`custom.css`).
-   - Uses the `tabItems` function to organize the content into different tabs (e.g., `Tab0`, `Tab1`, etc.).
+3.  **Body Section (`dashboardBody`):**
+    -   Defines the main body of the dashboard.
+    -   Utilizes the `dashboardBody` function and includes additional styling using `tags$head` to link an external stylesheet (`custom.css`).
+    -   Uses the `tabItems` function to organize the content into different tabs (e.g., `Tab0`, `Tab1`, etc.).
 
 ```{r}
 
@@ -121,10 +118,9 @@ body <- dashboardBody(
 
 ```
 
-
-4. **UI Function (`dashboardPage`):**
-   - Combines the header, sidebar, and body into a complete UI using the `dashboardPage` function.
-   - This UI function essentially wraps up all the UI components, creating the structure of the Shiny app.
+4.  **UI Function (`dashboardPage`):**
+    -   Combines the header, sidebar, and body into a complete UI using the `dashboardPage` function.
+    -   This UI function essentially wraps up all the UI components, creating the structure of the Shiny app.
 
 ```{r}
 
@@ -134,17 +130,424 @@ ui <- dashboardPage(header, sidebar, body)
 
 ```
 
-## Tabs 
+## Tabs
 
 ### Tab_About
+
+This script defines the UI for the About tab. At the bottom of teh script is where the UI is put together:
+
+```{r}
+
+# Tab Code --------------------------------------------------------------------------------------------------------------
+
+Tab0 <- tabItem(
+  tabName = "about",
+  tabBox(
+    width = "100%",
+    id = "tabset1",
+    overview_panel,
+    kpi_panel,
+    taxa_explorer_panel,
+    student_engagement_panel,
+    record_finder_panel
+  )
+)
+
+
+```
+
+The tab itself consists of a tabBox (a box with tabs) and the content for each of the panels within the box are defined in the sections above this piece of code. For example, the tab named "Overview" is defined as:
+
+```{r}
+
+# Overview Panel Content ------------------------------------------------------------------------------
+
+overview_panel <- tabPanel(
+  title = "Overview",
+  tags$div(
+    class = "landing-wrapper",
+    # child element 1: images
+    tags$div(
+      class = "landing-block background-content",
+      # top left
+      img(src = "group_photo2.jpeg"),
+      
+      # top right
+      img(src = "TomButterfly020823HolBl.jpg"),
+      
+      # bottom left
+      img(src = "TomMoth120823JulyHfly.jpg"),
+      
+      # bottom right
+      img(src = "group_photo.jpeg")
+    ),
+    
+    # child element 2: content
+    tags$div(
+      class = "landing-block foreground-content",
+      tags$div(
+        class = "foreground-text",
+        # tags$h2("Biodiversity Monitoring Programme Data Dashboard"),
+        tags$p("Welcome to the University of St Andrews Biodiversity Monitoring Program Data Dashboard! We are thrilled to have you here as we embark on a journey through the rich tapestry of nature. This data dashboard is the culmination of the hard work and dedication of our university students, who spent their summer immersed in the natural world, collecting invaluable biodiversity data."),
+        tags$p("Explore the wonders of the diverse ecosystems that surround us and gain insights into the intricate web of life that thrives within our region. Our mission is not only to deepen our understanding of the natural world but also to contribute to the conservation efforts that safeguard these vital ecosystems."),
+        tags$p("On this dashboard, you will find a wealth of information, from species counts and distribution maps to trends and observations. Whether you are a fellow researcher, a student, or simply a nature enthusiast, we invite you to delve into the data and be inspired by the beauty and complexity of our local environment."),
+        tags$p("Together, we can make a difference in preserving and protecting the biodiversity of the University of St Andrews and beyond. Thank you for joining us on this journey, and may this dashboard serve as a valuable resource for your exploration and learning.")
+      )
+    )
+  )
+)
+
+```
+
+The content of this tab is organized into two main elements within a div container:
+
+[Images Section:]{.underline}
+
+Four images are displayed in a 2x2 grid (top left, top right, bottom left, bottom right). These images are loaded from files named "group_photo2.jpeg," "TomButterfly020823HolBl.jpg," "TomMoth120823JulyHfly.jpg," and "group_photo.jpeg."
+
+[Content Section:]{.underline}
+
+Text content is provided in a "foreground-content" div.
+
+The div elements are given class ids with the argument "class" because we refer to them in the custom.css file - where we style the elements. I used the code from this link to build the content: <https://community.rstudio.com/t/background-images-in-shiny/12261>.
+
 ### Tab_KPI
-### Tab_Record_Finder
+
+Here we define the content for the tab: "Key Performance Indices". 
+
+**Summary:**
+- This tab is designed to display key performance indices related to biodiversity.
+
+- It includes sections for the Annual Biodiversity Index, Benchmark Biodiversity Index, Change Biodiversity Index (conditionally displayed), and a chart showing the number of species per taxa.
+
+- The layout is organized using `fluidRow` to arrange content horizontally and `box` to create collapsible boxes. Conditional rendering using `conditionalPanel` allows for dynamic display based on user input.
+
+Let's break down the code to understand its structure and purpose:
+
+```{r}
+# TAB: KPI
+Tab1 <- tabItem(
+  tabName = "kpi",
+  h3("Annual Biodiversity Index"),
+  fluidRow(
+    valueBoxOutput("S_H"),
+    valueBoxOutput("area"),
+    valueBoxOutput("engagement")
+  ),
+  h3("Benchmark Biodiversity Index"),
+  fluidRow(
+    valueBoxOutput("MS"),
+    valueBoxOutput("local"),
+    valueBoxOutput("fife")
+  ),
+  
+  div(
+    conditionalPanel(
+      "input.year !== '2022/2023'",
+      h3("Change Biodiversity Index"),
+      box(
+        collapsible = TRUE, width = 12,
+        plotlyOutput("example_plot"), style = "display:block; overflow-x: scroll;"
+      )
+    )
+  ),
+
+  # taxa chart
+  fluidRow(
+    box(
+      collapsible = TRUE, width = 12, title = "Number of species per taxa",
+      plotlyOutput("taxa_bar", height = "300px"), style = "display:block; overflow-x: scroll;"
+    )
+  )
+)
+```
+
+**Tab Structure:**
+
+- `tabItem`: This defines a tab within the Shiny application.
+  - `tabName = "kpi"`: The tab is named "kpi" which corresponds to the tabName id we gave it in the ui.R script: 
+
+```{r}
+# from ui.R:
+
+# first menu item: Key Performance Indices
+menuItem("Key Performance Indices", tabName = "kpi", icon = icon("gauge"))
+
+```
+
+
+**Content Sections:**
+
+- **Annual Biodiversity Index Section:**
+  - `h3("Annual Biodiversity Index")`: This adds a subheading indicating the section's title.
+  - `fluidRow`: This creates a row to hold the content.
+    - `valueBoxOutput`: These are placeholders for numeric values to be displayed. Three values ("S_H," "area," "engagement") are expected to be displayed in a row.
+
+- **Benchmark Biodiversity Index Section:**
+  - `h3("Benchmark Biodiversity Index")`: Another subheading for this section.
+  - `fluidRow`: Another row to hold the content.
+    - `valueBoxOutput`: Similar to the Annual Biodiversity Index section, three values ("MS," "local," "fife") are expected to be displayed in a row.
+
+- **Change Biodiversity Index Section (Conditional):**
+  - `div`: A div container.
+    - `conditionalPanel`: This panel is conditionally displayed based on the input "year" not being equal to "2022/2023."
+      - `h3("Change Biodiversity Index")`: A subheading for this section.
+      - `box`: A collapsible box containing a Plotly plot (`example_plot`). This section seems to be about the change in biodiversity over time.
+
+- **Taxa Chart Section:**
+  - `fluidRow`: Another row.
+    - `box`: A collapsible box with a title ("Number of species per taxa") and a Plotly plot (`taxa_bar`). This section likely displays a chart showing the number of species per taxa.
+
+### Tab_Taxa_Explorer
+
+**Summary**
+- The "TAXA EXPLORER" tab is designed to explore biodiversity data related to taxa.
+
+- It includes sections for summary charts, a Leaflet map, detailed lists of species, and records.
+
+- The layout is organized using `tabBox` for grouping content into tabs and `box` for creating collapsible boxes.
+
+- Various outputs such as plots and DataTables are defined for displaying data.
+
+```{r}
+# TAB: TAXA EXPLORER
+Tab2 <- tabItem(
+  tabName = "taxa_expl",
+  br(),
+  tabBox(
+    id = "box1", height = 500, width = 12,
+    tabPanel("Summary",
+      fluidRow(
+        column(6, 
+          h5("Top 10 Species Composition"),
+          plotOutput("species_pie")
+        ),
+        column(6, offset = 1.5, 
+          br(),
+          br(),
+          br(),
+          fluidRow(
+            valueBoxOutput("num_species_taxa", width = 10), style ="margin: auto;"
+          ),
+          fluidRow(
+            valueBoxOutput("num_records_taxa", width = 11), style ="margin: auto;"
+          ),
+          fluidRow(
+            valueBoxOutput("top_obs", width = 12), style ="margin: auto;"
+          )
+        )
+      )
+    ),
+    tabPanel("Top 50 species", plotlyOutput("species_bar", inline = FALSE, width = "100%")),
+  ),
+  box(
+    id = "box1", height = "100%", width = 12,
+    leafletOutput("MapPlot1")
+  ),
+  tabBox(
+    id = "box2", height = 500, width = 12,
+    tabPanel("Species List", DTOutput("species_list")),
+    tabPanel("Records", DTOutput("taxa_table"))
+  ),
+  uiOutput("Modal_taxa")
+)
+```
+
+**1. Tab Structure:**
+- `tabItem`: This defines a tab within the Shiny application.
+  - `tabName = "taxa_expl"`: The tab is named "taxa_expl."
+
+**2. Content Sections:**
+
+- **Summary Section:**
+  - `tabBox`: This creates a box containing tabs.
+    - `id = "box1"`: Identifier for the box.
+    - `height = 500, width = 12`: Dimensions of the box.
+    - `tabPanel("Summary", ...)`: The first tab is named "Summary."
+      - `fluidRow`: A row to hold content.
+        - Two columns:
+          - First column (6 units):
+            - `h5`: A subheading for the first column.
+            - `plotOutput("species_pie")`: Output for a plot displaying the top 10 species composition.
+          - Second column (6 units, offset by 1.5 units):
+            - Value boxes displaying the number of species, records, and top observer.
+
+- **Top 50 Species Section:**
+  - Another tab within the same `tabBox`.
+    - `tabPanel("Top 50 species", ...)`: The second tab is named "Top 50 species."
+      - `plotlyOutput("species_bar", inline = FALSE, width = "100%")`: Output for a Plotly plot displaying the top 50 species.
+
+- **Leaflet Map Section:**
+  - `box`: A collapsible box.
+    - `leafletOutput("MapPlot1")`: Output for a Leaflet map.
+
+- **Species List and Records Section:**
+  - Another `tabBox`.
+    - `id = "box2"`: Identifier for the second box.
+    - `height = 500, width = 12`: Dimensions of the box.
+    - Two tabs within this box:
+      - `tabPanel("Species List", DTOutput("species_list"))`: Displaying a DataTable of species.
+      - `tabPanel("Records", DTOutput("taxa_table"))`: Displaying a DataTable of records.
+
+- **Dynamic UI Section:**
+  - `uiOutput("Modal_taxa")`: Placeholder for dynamic UI content.
+
+
 ### Tab_Student_Engagement
 
+**Summary**
+
+- The "STUDENT ENGAGEMENT" tab is designed to explore and present data related to individual student engagement.
+
+- It includes sections for a header with a possible image, student description, value boxes displaying key metrics, a plot, and tabs with DataTables for species list and records.
+
+- The layout is organized using `fluidRow`, `box`, and `tabBox` for grouping content.
+
+```{r}
+# TAB: STUDENT ENGAGEMENT
+Tab3 <- tabItem(
+  tabName = "stud_expl",
+  tags$h3(
+    style = "display: flex; align-items: center;",
+    uiOutput("photoOutput"),
+    textOutput("student_heading")
+  ),
+  fluidRow(column(textOutput("student_description"), width = 12)),
+  br(),
+  fluidRow(
+    valueBoxOutput("num_records"),
+    valueBoxOutput("num_days"),
+    valueBoxOutput("top_taxa")
+  ),
+  fluidRow(
+    box(
+      collapsible = TRUE, width = 12,
+      plotlyOutput("stud_plot", height = "300px"), style = 'display:block; overflow-x: scroll;'
+    )
+  ),
+  fluidRow(
+    tabBox(
+      id = "box2", height = 500, width = 12,
+      tabPanel("Species List", DTOutput("species_list_student")),
+      tabPanel("Records", DTOutput("student_table"))
+    )
+  ),
+  uiOutput("Modal_student")
+)
+```
+
+**1. Tab Structure:**
+- `tabItem`: This defines a tab within the Shiny application.
+  - `tabName = "stud_expl"`: The tab is named "stud_expl."
+
+**2. Content Sections:**
+- **Header Section:**
+  - `tags$h3`: Heading section.
+    - Styled with flex display and align-items to center.
+    - `uiOutput("photoOutput")`: Placeholder for dynamic UI content (possibly an image).
+    - `textOutput("student_heading")`: Placeholder for dynamic UI content (possibly student heading).
+
+- **Student Description Section:**
+  - `fluidRow`: A row to hold content.
+    - `column(textOutput("student_description"), width = 12)`: A column displaying dynamic UI content (possibly student description).
+
+- **Value Box Section:**
+  - `fluidRow`: A row.
+    - `valueBoxOutput`: Three value boxes displaying the number of records, number of days, and top taxa.
+
+- **Plot Section:**
+  - `fluidRow`: Another row.
+    - `box`: A collapsible box.
+      - `plotlyOutput("stud_plot", height = "300px")`: Output for a Plotly plot (possibly related to student engagement), with a scrollable style.
+
+- **Species List and Records Section:**
+  - `fluidRow`: Another row.
+    - `tabBox`: A box containing tabs.
+      - `id = "box2"`: Identifier for the box.
+      - `height = 500, width = 12`: Dimensions of the box.
+      - Two tabs within this box:
+        - `tabPanel("Species List", DTOutput("species_list_student"))`: Displaying a DataTable of species related to the student.
+        - `tabPanel("Records", DTOutput("student_table"))`: Displaying a DataTable of records related to the student.
+
+- **Dynamic UI Section:**
+  - `uiOutput("Modal_student")`: Placeholder for dynamic UI content.
 
 
+### Tab_Record_Finder
+
+**Summary**
+
+- The "Record Finder" tab is designed to display a set of random images in an image gallery.
+- Users can enter a PhotoID with an extension, click a button to view the image, and the selected image will be displayed dynamically.
+- The layout is organized using `tags$div` to create containers, `textInput` and `actionButton` for user input and interaction, and `uiOutput` for dynamic content.
 
 
+```{r}
+# TAB 4: Record Finder
+all_Sphotos <- list.files(
+  path = paste0("www/"),
+  recursive = TRUE,
+  pattern = "\\.jpg$",
+  full.names = FALSE
+)
 
+random_photos <- sample(all_Sphotos, size = 10)
+
+Tab4 <- tabItem(
+  tabName = "record_finder",
+  tags$div(
+    class = "landing-wrapper-record",
+    # child element 1: images
+    tags$ul(
+      class = "image-gallery",
+      tags$li(img(src = paste(random_photos[1]))),
+      tags$li(img(src = paste(random_photos[2]))),
+      tags$li(img(src = paste(random_photos[3]))),
+      tags$li(img(src = paste(random_photos[4]))),
+      tags$li(img(src = paste(random_photos[5]))),
+      tags$li(img(src = paste(random_photos[6]))),
+      tags$li(img(src = paste(random_photos[7]))),
+      tags$li(img(src = paste(random_photos[8]))),
+      tags$li(img(src = paste(random_photos[9]))),
+      tags$li(img(src = paste(random_photos[10])))
+    ),
+
+    # child element 2: content
+    tags$div(
+      class = "landing-block foreground-content",
+      tags$div(
+        class = "foreground-text",
+        align = "center",
+        textInput("PhotoID", "Enter PhotoID (with extension):"),
+        actionButton("viewButton", "View Image", style = "display: block; background-color: #619e62; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: auto"),
+        br(),
+        br(),
+        uiOutput("imageOutput")
+      )
+    )
+  )
+)
+```
+
+**1. Tab Structure:**
+- `tabItem`: This defines a tab within the Shiny application.
+  - `tabName = "record_finder"`: The tab is named "record_finder."
+
+**2. Content Sections:**
+- **Random Photos Section:**
+  - `list.files`: Reads all photo files within the "www/" directory with a ".jpg" extension.
+  - `sample`: Selects a random sample of 10 photos from the list.
+
+- **Image Gallery Section:**
+  - `tags$div`: A container div with class "landing-wrapper-record."
+    - `tags$ul`: An unordered list with class "image-gallery."
+      - `tags$li`: List items containing images. Each image is sourced from a randomly selected photo.
+
+- **Content Section:**
+  - `tags$div`: Another container div with class "landing-block foreground-content."
+    - `tags$div`: A div for text content.
+      - `textInput`: An input field for entering a PhotoID with extension.
+      - `actionButton`: A button for triggering an action, in this case, to view the image.
+      - `uiOutput("imageOutput")`: Placeholder for dynamic UI content (possibly an image).
 
 

@@ -151,9 +151,8 @@ html, body {
     top: 15%;
     z-index: 9998;
     display: flex;
-    left: 46%;
-    overflow: auto;
-    width: auto;
+    left: 40%;
+    width: 150%;
 }
 
 .landing-wrapper-record .foreground-content .foreground-text {

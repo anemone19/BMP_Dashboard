@@ -1,4 +1,5 @@
-# Value Box Module
+# Value Box Module -----------------------------------------------------------------------------------------
+
 # custom value box function 
 
 customValueBox <- function(value = NULL, subtitle = NULL, icon = NULL, color, background, 
@@ -26,13 +27,6 @@ customValueBox <- function(value = NULL, subtitle = NULL, icon = NULL, color, ba
   )
 }
 
-# valuebox module ui function -------------------------------------------------
-
-
-valuebox_ui <- function(id){
-  ns <- NS(id) # define namespace for below
-  uiOutput(ns("vb"))
-}
 
 # valuebox module server function ---------------------------------------------
 

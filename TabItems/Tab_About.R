@@ -2,7 +2,62 @@
 
 # Tab Descriptions:
 
-# Description KPI Panel ------------------------------------------------------------------------------
+# Overview Panel Content ------------------------------------------------------------------------------
+
+overview_panel <- tabPanel(
+  title = "Overview",
+  tags$div(
+    class = "landing-wrapper",
+    # child element 1: images
+    tags$div(
+      class = "landing-block background-content",
+      # top left
+      img(src = "group_photo2.jpeg"),
+      
+      # top right
+      img(src = "TomButterfly020823HolBl.jpg"),
+      
+      # bottom left
+      img(src = "TomMoth120823JulyHfly.jpg"),
+      
+      # bottom right
+      img(src = "group_photo.jpeg")
+    ),
+    
+    # child element 2: content
+    tags$div(
+      class = "landing-block foreground-content",
+      tags$div(
+        class = "foreground-text",
+        # tags$h2("Biodiversity Monitoring Programme Data Dashboard"),
+        tags$p("Welcome to the University of St Andrews Biodiversity Monitoring Program Data Dashboard! We are thrilled to have you here as we embark on a journey through the rich tapestry of nature. This data dashboard is the culmination of the hard work and dedication of our university students, who spent their summer immersed in the natural world, collecting invaluable biodiversity data."),
+        tags$p("Explore the wonders of the diverse ecosystems that surround us and gain insights into the intricate web of life that thrives within our region. Our mission is not only to deepen our understanding of the natural world but also to contribute to the conservation efforts that safeguard these vital ecosystems."),
+        tags$p("On this dashboard, you will find a wealth of information, from species counts and distribution maps to trends and observations. Whether you are a fellow researcher, a student, or simply a nature enthusiast, we invite you to delve into the data and be inspired by the beauty and complexity of our local environment."),
+        tags$p("Together, we can make a difference in preserving and protecting the biodiversity of the University of St Andrews and beyond. Thank you for joining us on this journey, and may this dashboard serve as a valuable resource for your exploration and learning.")
+      )
+    )
+  )
+)
+
+# KPI Panel Content ------------------------------------------------------------------------------
+
+# Descriptions for server side valueboxes
+
+# ABI score descriptions
+par_s_h <- "Description of species and habitat score."
+
+par_area <- "Description of area managed for biodiversity score"
+
+par_engage <- "Description of biodiversity engagement score."
+
+# BBI score descriptions
+par_m_s <- "Description of mean species richness per hectare."
+
+par_l_s <- "Description of local species richness per hectare."
+
+par_fife <- "Description of Fife species richness per hectare."
+
+# Panel code
 
 kpi_panel <- tabPanel(
   title = "Key Performance Indices",
@@ -28,7 +83,7 @@ kpi_panel <- tabPanel(
   br()
 )
 
-# Description Taxa Explorer Panel ------------------------------------------------------------------------------
+# Taxa Explorer Panel Content ------------------------------------------------------------------------------
 
 taxa_explorer_panel <- tabPanel(
   title = "Taxa Explorer",
@@ -59,7 +114,7 @@ taxa_explorer_panel <- tabPanel(
   p("Some functionalities may depend on the availability of data such as photos.")
 )
 
-# Description Student Engagement Panel ------------------------------------------------------------------------------
+# Student Engagement Panel Content------------------------------------------------------------------------------
 
 student_engagement_panel <- tabPanel(
   title = "Student Engagement",
@@ -95,7 +150,7 @@ student_engagement_panel <- tabPanel(
   p("Enjoy exploring the unique biodiversity contributions of each student with the Student Engagement Explorer!")
 )
 
-# Description Record Finder Panel ------------------------------------------------------------------------------
+# Record Finder Panel Content ------------------------------------------------------------------------------
 
 record_finder_panel <- tabPanel(
   title = "Record Finder",
@@ -136,40 +191,7 @@ Tab0 <- tabItem(
   tabBox(
     width = "100%",
     id = "tabset1",
-    tabPanel(
-      title = "Overview",
-      tags$div(
-        class = "landing-wrapper",
-        # child element 1: images
-        tags$div(
-          class = "landing-block background-content",
-          # top left
-          img(src = "group_photo2.jpeg"),
-
-          # top right
-          img(src = "TomButterfly020823HolBl.jpg"),
-
-          # bottom left
-          img(src = "TomMoth120823JulyHfly.jpg"),
-
-          # bottom right
-          img(src = "group_photo.jpeg")
-        ),
-
-        # child element 2: content
-        tags$div(
-          class = "landing-block foreground-content",
-          tags$div(
-            class = "foreground-text",
-            # tags$h2("Biodiversity Monitoring Programme Data Dashboard"),
-            tags$p("Welcome to the University of St Andrews Biodiversity Monitoring Program Data Dashboard! We are thrilled to have you here as we embark on a journey through the rich tapestry of nature. This data dashboard is the culmination of the hard work and dedication of our university students, who spent their summer immersed in the natural world, collecting invaluable biodiversity data."),
-            tags$p("Explore the wonders of the diverse ecosystems that surround us and gain insights into the intricate web of life that thrives within our region. Our mission is not only to deepen our understanding of the natural world but also to contribute to the conservation efforts that safeguard these vital ecosystems."),
-            tags$p("On this dashboard, you will find a wealth of information, from species counts and distribution maps to trends and observations. Whether you are a fellow researcher, a student, or simply a nature enthusiast, we invite you to delve into the data and be inspired by the beauty and complexity of our local environment."),
-            tags$p("Together, we can make a difference in preserving and protecting the biodiversity of the University of St Andrews and beyond. Thank you for joining us on this journey, and may this dashboard serve as a valuable resource for your exploration and learning.")
-          )
-        )
-      )
-    ),
+    overview_panel,
     kpi_panel,
     taxa_explorer_panel,
     student_engagement_panel,

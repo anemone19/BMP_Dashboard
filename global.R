@@ -66,30 +66,6 @@ for(i in seq_along(all_years_list)){
 # extract years
 years <- names(all_years_list)
 # years <- years[complete.cases(years)]
-
-# TAB 0: ABOUT -------------------------------------------------------------------------------------------
-
-# ABI score descriptions
-par_s_h <- "Description of species and habitat score."
-
-par_area <- "Description of area managed for biodiversity score"
-
-par_engage <- "Description of biodiversity engagement score."
-
-# BBI score descriptions
-par_m_s <- "Description of mean species richness per hectare."
-
-par_l_s <- "Description of local species richness per hectare."
-
-par_fife <- "Description of Fife species richness per hectare."
-
-# TAXA Explorer about
-
-taxa_explorer_about <- "Taxa Explorer is where you can have a look at the species records for each taxa surveyed.
-First, select your taxa and you'll see a bar chart showing the number of records collected for species beloinging to the chosen taxa.
-Below the graph is a table of the records, where you can see the date the record was made and who the observer was. Additionally, if you select a row
-with a photo identification number, a photo taken by the observer of the record will be displayed."
-
 # Data Table Options --------------------------------------------------------------------------------------
 
 # table options 
@@ -128,4 +104,3 @@ table_options <- function() {
 # NB: COMMENT OUT CODE WHEN RUNNING LOCALLY 
 # rsconnect::deployApp("/Users/anecloete/Desktop/BMP_Dashboard",forceUpdate = T)
  
-

@@ -99,6 +99,7 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+\usepackage{soul}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -1136,17 +1137,801 @@ Here we define the user interface (UI) for the dashboard. First we source the ui
 \hypertarget{tab_about}{%
 \subsection{Tab\_About}\label{tab_about}}
 
+This script defines the UI for the About tab. At the bottom of teh script is where the UI is put together:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Tab Code {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{Tab0 }\OtherTok{\textless{}{-}} \FunctionTok{tabItem}\NormalTok{(}
+  \AttributeTok{tabName =} \StringTok{"about"}\NormalTok{,}
+  \FunctionTok{tabBox}\NormalTok{(}
+    \AttributeTok{width =} \StringTok{"100\%"}\NormalTok{,}
+    \AttributeTok{id =} \StringTok{"tabset1"}\NormalTok{,}
+\NormalTok{    overview\_panel,}
+\NormalTok{    kpi\_panel,}
+\NormalTok{    taxa\_explorer\_panel,}
+\NormalTok{    student\_engagement\_panel,}
+\NormalTok{    record\_finder\_panel}
+\NormalTok{  )}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The tab itself consists of a tabBox (a box with tabs) and the content for each of the panels within the box are defined in the sections above this piece of code. For example, the tab named ``Overview'' is defined as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Overview Panel Content {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{overview\_panel }\OtherTok{\textless{}{-}} \FunctionTok{tabPanel}\NormalTok{(}
+  \AttributeTok{title =} \StringTok{"Overview"}\NormalTok{,}
+\NormalTok{  tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+    \AttributeTok{class =} \StringTok{"landing{-}wrapper"}\NormalTok{,}
+    \CommentTok{\# child element 1: images}
+\NormalTok{    tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+      \AttributeTok{class =} \StringTok{"landing{-}block background{-}content"}\NormalTok{,}
+      \CommentTok{\# top left}
+      \FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \StringTok{"group\_photo2.jpeg"}\NormalTok{),}
+      
+      \CommentTok{\# top right}
+      \FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \StringTok{"TomButterfly020823HolBl.jpg"}\NormalTok{),}
+      
+      \CommentTok{\# bottom left}
+      \FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \StringTok{"TomMoth120823JulyHfly.jpg"}\NormalTok{),}
+      
+      \CommentTok{\# bottom right}
+      \FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \StringTok{"group\_photo.jpeg"}\NormalTok{)}
+\NormalTok{    ),}
+    
+    \CommentTok{\# child element 2: content}
+\NormalTok{    tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+      \AttributeTok{class =} \StringTok{"landing{-}block foreground{-}content"}\NormalTok{,}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+        \AttributeTok{class =} \StringTok{"foreground{-}text"}\NormalTok{,}
+        \CommentTok{\# tags$h2("Biodiversity Monitoring Programme Data Dashboard"),}
+\NormalTok{        tags}\SpecialCharTok{$}\FunctionTok{p}\NormalTok{(}\StringTok{"Welcome to the University of St Andrews Biodiversity Monitoring Program Data Dashboard! We are thrilled to have you here as we embark on a journey through the rich tapestry of nature. This data dashboard is the culmination of the hard work and dedication of our university students, who spent their summer immersed in the natural world, collecting invaluable biodiversity data."}\NormalTok{),}
+\NormalTok{        tags}\SpecialCharTok{$}\FunctionTok{p}\NormalTok{(}\StringTok{"Explore the wonders of the diverse ecosystems that surround us and gain insights into the intricate web of life that thrives within our region. Our mission is not only to deepen our understanding of the natural world but also to contribute to the conservation efforts that safeguard these vital ecosystems."}\NormalTok{),}
+\NormalTok{        tags}\SpecialCharTok{$}\FunctionTok{p}\NormalTok{(}\StringTok{"On this dashboard, you will find a wealth of information, from species counts and distribution maps to trends and observations. Whether you are a fellow researcher, a student, or simply a nature enthusiast, we invite you to delve into the data and be inspired by the beauty and complexity of our local environment."}\NormalTok{),}
+\NormalTok{        tags}\SpecialCharTok{$}\FunctionTok{p}\NormalTok{(}\StringTok{"Together, we can make a difference in preserving and protecting the biodiversity of the University of St Andrews and beyond. Thank you for joining us on this journey, and may this dashboard serve as a valuable resource for your exploration and learning."}\NormalTok{)}
+\NormalTok{      )}
+\NormalTok{    )}
+\NormalTok{  )}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The content of this tab is organized into two main elements within a div container:
+
+\ul{Images Section:}
+
+Four images are displayed in a 2x2 grid (top left, top right, bottom left, bottom right). These images are loaded from files named ``group\_photo2.jpeg,'' ``TomButterfly020823HolBl.jpg,'' ``TomMoth120823JulyHfly.jpg,'' and ``group\_photo.jpeg.''
+
+\ul{Content Section:}
+
+Text content is provided in a ``foreground-content'' div.
+
+The div elements are given class ids with the argument ``class'' because we refer to them in the custom.css file - where we style the elements. I used the code from this link to build the content: \url{https://community.rstudio.com/t/background-images-in-shiny/12261}.
+
 \hypertarget{tab_kpi}{%
 \subsection{Tab\_KPI}\label{tab_kpi}}
 
-\hypertarget{tab_record_finder}{%
-\subsection{Tab\_Record\_Finder}\label{tab_record_finder}}
+Here we define the content for the tab: ``Key Performance Indices''.
+
+\textbf{Summary:}
+- This tab is designed to display key performance indices related to biodiversity.
+
+\begin{itemize}
+\item
+  It includes sections for the Annual Biodiversity Index, Benchmark Biodiversity Index, Change Biodiversity Index (conditionally displayed), and a chart showing the number of species per taxa.
+\item
+  The layout is organized using \texttt{fluidRow} to arrange content horizontally and \texttt{box} to create collapsible boxes. Conditional rendering using \texttt{conditionalPanel} allows for dynamic display based on user input.
+\end{itemize}
+
+Let's break down the code to understand its structure and purpose:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# TAB: KPI}
+\NormalTok{Tab1 }\OtherTok{\textless{}{-}} \FunctionTok{tabItem}\NormalTok{(}
+  \AttributeTok{tabName =} \StringTok{"kpi"}\NormalTok{,}
+  \FunctionTok{h3}\NormalTok{(}\StringTok{"Annual Biodiversity Index"}\NormalTok{),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"S\_H"}\NormalTok{),}
+    \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"area"}\NormalTok{),}
+    \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"engagement"}\NormalTok{)}
+\NormalTok{  ),}
+  \FunctionTok{h3}\NormalTok{(}\StringTok{"Benchmark Biodiversity Index"}\NormalTok{),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"MS"}\NormalTok{),}
+    \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"local"}\NormalTok{),}
+    \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"fife"}\NormalTok{)}
+\NormalTok{  ),}
+  
+  \FunctionTok{div}\NormalTok{(}
+    \FunctionTok{conditionalPanel}\NormalTok{(}
+      \StringTok{"input.year !== \textquotesingle{}2022/2023\textquotesingle{}"}\NormalTok{,}
+      \FunctionTok{h3}\NormalTok{(}\StringTok{"Change Biodiversity Index"}\NormalTok{),}
+      \FunctionTok{box}\NormalTok{(}
+        \AttributeTok{collapsible =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{width =} \DecValTok{12}\NormalTok{,}
+        \FunctionTok{plotlyOutput}\NormalTok{(}\StringTok{"example\_plot"}\NormalTok{), }\AttributeTok{style =} \StringTok{"display:block; overflow{-}x: scroll;"}
+\NormalTok{      )}
+\NormalTok{    )}
+\NormalTok{  ),}
+
+  \CommentTok{\# taxa chart}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{box}\NormalTok{(}
+      \AttributeTok{collapsible =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{width =} \DecValTok{12}\NormalTok{, }\AttributeTok{title =} \StringTok{"Number of species per taxa"}\NormalTok{,}
+      \FunctionTok{plotlyOutput}\NormalTok{(}\StringTok{"taxa\_bar"}\NormalTok{, }\AttributeTok{height =} \StringTok{"300px"}\NormalTok{), }\AttributeTok{style =} \StringTok{"display:block; overflow{-}x: scroll;"}
+\NormalTok{    )}
+\NormalTok{  )}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Tab Structure:}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{tabItem}: This defines a tab within the Shiny application.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{tabName\ =\ "kpi"}: The tab is named ``kpi'' which corresponds to the tabName id we gave it in the ui.R script:
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# from ui.R:}
+
+\CommentTok{\# first menu item: Key Performance Indices}
+\FunctionTok{menuItem}\NormalTok{(}\StringTok{"Key Performance Indices"}\NormalTok{, }\AttributeTok{tabName =} \StringTok{"kpi"}\NormalTok{, }\AttributeTok{icon =} \FunctionTok{icon}\NormalTok{(}\StringTok{"gauge"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Content Sections:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Annual Biodiversity Index Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{h3("Annual\ Biodiversity\ Index")}: This adds a subheading indicating the section's title.
+  \item
+    \texttt{fluidRow}: This creates a row to hold the content.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{valueBoxOutput}: These are placeholders for numeric values to be displayed. Three values (``S\_H,'' ``area,'' ``engagement'') are expected to be displayed in a row.
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Benchmark Biodiversity Index Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{h3("Benchmark\ Biodiversity\ Index")}: Another subheading for this section.
+  \item
+    \texttt{fluidRow}: Another row to hold the content.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{valueBoxOutput}: Similar to the Annual Biodiversity Index section, three values (``MS,'' ``local,'' ``fife'') are expected to be displayed in a row.
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Change Biodiversity Index Section (Conditional):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{div}: A div container.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{conditionalPanel}: This panel is conditionally displayed based on the input ``year'' not being equal to ``2022/2023.''
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \texttt{h3("Change\ Biodiversity\ Index")}: A subheading for this section.
+      \item
+        \texttt{box}: A collapsible box containing a Plotly plot (\texttt{example\_plot}). This section seems to be about the change in biodiversity over time.
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Taxa Chart Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{fluidRow}: Another row.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{box}: A collapsible box with a title (``Number of species per taxa'') and a Plotly plot (\texttt{taxa\_bar}). This section likely displays a chart showing the number of species per taxa.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{tab_taxa_explorer}{%
+\subsection{Tab\_Taxa\_Explorer}\label{tab_taxa_explorer}}
+
+\textbf{Summary}
+- The ``TAXA EXPLORER'' tab is designed to explore biodiversity data related to taxa.
+
+\begin{itemize}
+\item
+  It includes sections for summary charts, a Leaflet map, detailed lists of species, and records.
+\item
+  The layout is organized using \texttt{tabBox} for grouping content into tabs and \texttt{box} for creating collapsible boxes.
+\item
+  Various outputs such as plots and DataTables are defined for displaying data.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# TAB: TAXA EXPLORER}
+\NormalTok{Tab2 }\OtherTok{\textless{}{-}} \FunctionTok{tabItem}\NormalTok{(}
+  \AttributeTok{tabName =} \StringTok{"taxa\_expl"}\NormalTok{,}
+  \FunctionTok{br}\NormalTok{(),}
+  \FunctionTok{tabBox}\NormalTok{(}
+    \AttributeTok{id =} \StringTok{"box1"}\NormalTok{, }\AttributeTok{height =} \DecValTok{500}\NormalTok{, }\AttributeTok{width =} \DecValTok{12}\NormalTok{,}
+    \FunctionTok{tabPanel}\NormalTok{(}\StringTok{"Summary"}\NormalTok{,}
+      \FunctionTok{fluidRow}\NormalTok{(}
+        \FunctionTok{column}\NormalTok{(}\DecValTok{6}\NormalTok{, }
+          \FunctionTok{h5}\NormalTok{(}\StringTok{"Top 10 Species Composition"}\NormalTok{),}
+          \FunctionTok{plotOutput}\NormalTok{(}\StringTok{"species\_pie"}\NormalTok{)}
+\NormalTok{        ),}
+        \FunctionTok{column}\NormalTok{(}\DecValTok{6}\NormalTok{, }\AttributeTok{offset =} \FloatTok{1.5}\NormalTok{, }
+          \FunctionTok{br}\NormalTok{(),}
+          \FunctionTok{br}\NormalTok{(),}
+          \FunctionTok{br}\NormalTok{(),}
+          \FunctionTok{fluidRow}\NormalTok{(}
+            \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"num\_species\_taxa"}\NormalTok{, }\AttributeTok{width =} \DecValTok{10}\NormalTok{), }\AttributeTok{style =}\StringTok{"margin: auto;"}
+\NormalTok{          ),}
+          \FunctionTok{fluidRow}\NormalTok{(}
+            \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"num\_records\_taxa"}\NormalTok{, }\AttributeTok{width =} \DecValTok{11}\NormalTok{), }\AttributeTok{style =}\StringTok{"margin: auto;"}
+\NormalTok{          ),}
+          \FunctionTok{fluidRow}\NormalTok{(}
+            \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"top\_obs"}\NormalTok{, }\AttributeTok{width =} \DecValTok{12}\NormalTok{), }\AttributeTok{style =}\StringTok{"margin: auto;"}
+\NormalTok{          )}
+\NormalTok{        )}
+\NormalTok{      )}
+\NormalTok{    ),}
+    \FunctionTok{tabPanel}\NormalTok{(}\StringTok{"Top 50 species"}\NormalTok{, }\FunctionTok{plotlyOutput}\NormalTok{(}\StringTok{"species\_bar"}\NormalTok{, }\AttributeTok{inline =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{width =} \StringTok{"100\%"}\NormalTok{)),}
+\NormalTok{  ),}
+  \FunctionTok{box}\NormalTok{(}
+    \AttributeTok{id =} \StringTok{"box1"}\NormalTok{, }\AttributeTok{height =} \StringTok{"100\%"}\NormalTok{, }\AttributeTok{width =} \DecValTok{12}\NormalTok{,}
+    \FunctionTok{leafletOutput}\NormalTok{(}\StringTok{"MapPlot1"}\NormalTok{)}
+\NormalTok{  ),}
+  \FunctionTok{tabBox}\NormalTok{(}
+    \AttributeTok{id =} \StringTok{"box2"}\NormalTok{, }\AttributeTok{height =} \DecValTok{500}\NormalTok{, }\AttributeTok{width =} \DecValTok{12}\NormalTok{,}
+    \FunctionTok{tabPanel}\NormalTok{(}\StringTok{"Species List"}\NormalTok{, }\FunctionTok{DTOutput}\NormalTok{(}\StringTok{"species\_list"}\NormalTok{)),}
+    \FunctionTok{tabPanel}\NormalTok{(}\StringTok{"Records"}\NormalTok{, }\FunctionTok{DTOutput}\NormalTok{(}\StringTok{"taxa\_table"}\NormalTok{))}
+\NormalTok{  ),}
+  \FunctionTok{uiOutput}\NormalTok{(}\StringTok{"Modal\_taxa"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{1. Tab Structure:}
+- \texttt{tabItem}: This defines a tab within the Shiny application.
+- \texttt{tabName\ =\ "taxa\_expl"}: The tab is named ``taxa\_expl.''
+
+\textbf{2. Content Sections:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Summary Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{tabBox}: This creates a box containing tabs.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{id\ =\ "box1"}: Identifier for the box.
+    \item
+      \texttt{height\ =\ 500,\ width\ =\ 12}: Dimensions of the box.
+    \item
+      \texttt{tabPanel("Summary",\ ...)}: The first tab is named ``Summary.''
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \texttt{fluidRow}: A row to hold content.
+
+        \begin{itemize}
+        \tightlist
+        \item
+          Two columns:
+
+          \begin{itemize}
+          \tightlist
+          \item
+            First column (6 units):
+
+            \begin{itemize}
+            \tightlist
+            \item
+              \texttt{h5}: A subheading for the first column.
+            \item
+              \texttt{plotOutput("species\_pie")}: Output for a plot displaying the top 10 species composition.
+            \end{itemize}
+          \item
+            Second column (6 units, offset by 1.5 units):
+
+            \begin{itemize}
+            \tightlist
+            \item
+              Value boxes displaying the number of species, records, and top observer.
+            \end{itemize}
+          \end{itemize}
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Top 50 Species Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Another tab within the same \texttt{tabBox}.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{tabPanel("Top\ 50\ species",\ ...)}: The second tab is named ``Top 50 species.''
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \texttt{plotlyOutput("species\_bar",\ inline\ =\ FALSE,\ width\ =\ "100\%")}: Output for a Plotly plot displaying the top 50 species.
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Leaflet Map Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{box}: A collapsible box.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{leafletOutput("MapPlot1")}: Output for a Leaflet map.
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Species List and Records Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Another \texttt{tabBox}.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{id\ =\ "box2"}: Identifier for the second box.
+    \item
+      \texttt{height\ =\ 500,\ width\ =\ 12}: Dimensions of the box.
+    \item
+      Two tabs within this box:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \texttt{tabPanel("Species\ List",\ DTOutput("species\_list"))}: Displaying a DataTable of species.
+      \item
+        \texttt{tabPanel("Records",\ DTOutput("taxa\_table"))}: Displaying a DataTable of records.
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Dynamic UI Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{uiOutput("Modal\_taxa")}: Placeholder for dynamic UI content.
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{tab_student_engagement}{%
 \subsection{Tab\_Student\_Engagement}\label{tab_student_engagement}}
 
+\textbf{Summary}
+
+\begin{itemize}
+\item
+  The ``STUDENT ENGAGEMENT'' tab is designed to explore and present data related to individual student engagement.
+\item
+  It includes sections for a header with a possible image, student description, value boxes displaying key metrics, a plot, and tabs with DataTables for species list and records.
+\item
+  The layout is organized using \texttt{fluidRow}, \texttt{box}, and \texttt{tabBox} for grouping content.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# TAB: STUDENT ENGAGEMENT}
+\NormalTok{Tab3 }\OtherTok{\textless{}{-}} \FunctionTok{tabItem}\NormalTok{(}
+  \AttributeTok{tabName =} \StringTok{"stud\_expl"}\NormalTok{,}
+\NormalTok{  tags}\SpecialCharTok{$}\FunctionTok{h3}\NormalTok{(}
+    \AttributeTok{style =} \StringTok{"display: flex; align{-}items: center;"}\NormalTok{,}
+    \FunctionTok{uiOutput}\NormalTok{(}\StringTok{"photoOutput"}\NormalTok{),}
+    \FunctionTok{textOutput}\NormalTok{(}\StringTok{"student\_heading"}\NormalTok{)}
+\NormalTok{  ),}
+  \FunctionTok{fluidRow}\NormalTok{(}\FunctionTok{column}\NormalTok{(}\FunctionTok{textOutput}\NormalTok{(}\StringTok{"student\_description"}\NormalTok{), }\AttributeTok{width =} \DecValTok{12}\NormalTok{)),}
+  \FunctionTok{br}\NormalTok{(),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"num\_records"}\NormalTok{),}
+    \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"num\_days"}\NormalTok{),}
+    \FunctionTok{valueBoxOutput}\NormalTok{(}\StringTok{"top\_taxa"}\NormalTok{)}
+\NormalTok{  ),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{box}\NormalTok{(}
+      \AttributeTok{collapsible =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{width =} \DecValTok{12}\NormalTok{,}
+      \FunctionTok{plotlyOutput}\NormalTok{(}\StringTok{"stud\_plot"}\NormalTok{, }\AttributeTok{height =} \StringTok{"300px"}\NormalTok{), }\AttributeTok{style =} \StringTok{\textquotesingle{}display:block; overflow{-}x: scroll;\textquotesingle{}}
+\NormalTok{    )}
+\NormalTok{  ),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{tabBox}\NormalTok{(}
+      \AttributeTok{id =} \StringTok{"box2"}\NormalTok{, }\AttributeTok{height =} \DecValTok{500}\NormalTok{, }\AttributeTok{width =} \DecValTok{12}\NormalTok{,}
+      \FunctionTok{tabPanel}\NormalTok{(}\StringTok{"Species List"}\NormalTok{, }\FunctionTok{DTOutput}\NormalTok{(}\StringTok{"species\_list\_student"}\NormalTok{)),}
+      \FunctionTok{tabPanel}\NormalTok{(}\StringTok{"Records"}\NormalTok{, }\FunctionTok{DTOutput}\NormalTok{(}\StringTok{"student\_table"}\NormalTok{))}
+\NormalTok{    )}
+\NormalTok{  ),}
+  \FunctionTok{uiOutput}\NormalTok{(}\StringTok{"Modal\_student"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{1. Tab Structure:}
+- \texttt{tabItem}: This defines a tab within the Shiny application.
+- \texttt{tabName\ =\ "stud\_expl"}: The tab is named ``stud\_expl.''
+
+\textbf{2. Content Sections:}
+- \textbf{Header Section:}
+- \texttt{tags\$h3}: Heading section.
+- Styled with flex display and align-items to center.
+- \texttt{uiOutput("photoOutput")}: Placeholder for dynamic UI content (possibly an image).
+- \texttt{textOutput("student\_heading")}: Placeholder for dynamic UI content (possibly student heading).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Student Description Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{fluidRow}: A row to hold content.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{column(textOutput("student\_description"),\ width\ =\ 12)}: A column displaying dynamic UI content (possibly student description).
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Value Box Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{fluidRow}: A row.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{valueBoxOutput}: Three value boxes displaying the number of records, number of days, and top taxa.
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Plot Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{fluidRow}: Another row.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{box}: A collapsible box.
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \texttt{plotlyOutput("stud\_plot",\ height\ =\ "300px")}: Output for a Plotly plot (possibly related to student engagement), with a scrollable style.
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Species List and Records Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{fluidRow}: Another row.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{tabBox}: A box containing tabs.
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \texttt{id\ =\ "box2"}: Identifier for the box.
+      \item
+        \texttt{height\ =\ 500,\ width\ =\ 12}: Dimensions of the box.
+      \item
+        Two tabs within this box:
+
+        \begin{itemize}
+        \tightlist
+        \item
+          \texttt{tabPanel("Species\ List",\ DTOutput("species\_list\_student"))}: Displaying a DataTable of species related to the student.
+        \item
+          \texttt{tabPanel("Records",\ DTOutput("student\_table"))}: Displaying a DataTable of records related to the student.
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Dynamic UI Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{uiOutput("Modal\_student")}: Placeholder for dynamic UI content.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{tab_record_finder}{%
+\subsection{Tab\_Record\_Finder}\label{tab_record_finder}}
+
+\textbf{Summary}
+
+\begin{itemize}
+\tightlist
+\item
+  The ``Record Finder'' tab is designed to display a set of random images in an image gallery.
+\item
+  Users can enter a PhotoID with an extension, click a button to view the image, and the selected image will be displayed dynamically.
+\item
+  The layout is organized using \texttt{tags\$div} to create containers, \texttt{textInput} and \texttt{actionButton} for user input and interaction, and \texttt{uiOutput} for dynamic content.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# TAB 4: Record Finder}
+\NormalTok{all\_Sphotos }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}
+  \AttributeTok{path =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"www/"}\NormalTok{),}
+  \AttributeTok{recursive =} \ConstantTok{TRUE}\NormalTok{,}
+  \AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.jpg$"}\NormalTok{,}
+  \AttributeTok{full.names =} \ConstantTok{FALSE}
+\NormalTok{)}
+
+\NormalTok{random\_photos }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(all\_Sphotos, }\AttributeTok{size =} \DecValTok{10}\NormalTok{)}
+
+\NormalTok{Tab4 }\OtherTok{\textless{}{-}} \FunctionTok{tabItem}\NormalTok{(}
+  \AttributeTok{tabName =} \StringTok{"record\_finder"}\NormalTok{,}
+\NormalTok{  tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+    \AttributeTok{class =} \StringTok{"landing{-}wrapper{-}record"}\NormalTok{,}
+    \CommentTok{\# child element 1: images}
+\NormalTok{    tags}\SpecialCharTok{$}\FunctionTok{ul}\NormalTok{(}
+      \AttributeTok{class =} \StringTok{"image{-}gallery"}\NormalTok{,}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{1}\NormalTok{]))),}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{2}\NormalTok{]))),}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{3}\NormalTok{]))),}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{4}\NormalTok{]))),}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{5}\NormalTok{]))),}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{6}\NormalTok{]))),}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{7}\NormalTok{]))),}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{8}\NormalTok{]))),}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{9}\NormalTok{]))),}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}\FunctionTok{img}\NormalTok{(}\AttributeTok{src =} \FunctionTok{paste}\NormalTok{(random\_photos[}\DecValTok{10}\NormalTok{])))}
+\NormalTok{    ),}
+
+    \CommentTok{\# child element 2: content}
+\NormalTok{    tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+      \AttributeTok{class =} \StringTok{"landing{-}block foreground{-}content"}\NormalTok{,}
+\NormalTok{      tags}\SpecialCharTok{$}\FunctionTok{div}\NormalTok{(}
+        \AttributeTok{class =} \StringTok{"foreground{-}text"}\NormalTok{,}
+        \AttributeTok{align =} \StringTok{"center"}\NormalTok{,}
+        \FunctionTok{textInput}\NormalTok{(}\StringTok{"PhotoID"}\NormalTok{, }\StringTok{"Enter PhotoID (with extension):"}\NormalTok{),}
+        \FunctionTok{actionButton}\NormalTok{(}\StringTok{"viewButton"}\NormalTok{, }\StringTok{"View Image"}\NormalTok{, }\AttributeTok{style =} \StringTok{"display: block; background{-}color: \#619e62; color: \#ffffff; border: none; border{-}radius: 5px; cursor: pointer; font{-}size: 16px; margin: auto"}\NormalTok{),}
+        \FunctionTok{br}\NormalTok{(),}
+        \FunctionTok{br}\NormalTok{(),}
+        \FunctionTok{uiOutput}\NormalTok{(}\StringTok{"imageOutput"}\NormalTok{)}
+\NormalTok{      )}
+\NormalTok{    )}
+\NormalTok{  )}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{1. Tab Structure:}
+- \texttt{tabItem}: This defines a tab within the Shiny application.
+- \texttt{tabName\ =\ "record\_finder"}: The tab is named ``record\_finder.''
+
+\textbf{2. Content Sections:}
+- \textbf{Random Photos Section:}
+- \texttt{list.files}: Reads all photo files within the ``www/'' directory with a ``.jpg'' extension.
+- \texttt{sample}: Selects a random sample of 10 photos from the list.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Image Gallery Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{tags\$div}: A container div with class ``landing-wrapper-record.''
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{tags\$ul}: An unordered list with class ``image-gallery.''
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \texttt{tags\$li}: List items containing images. Each image is sourced from a randomly selected photo.
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Content Section:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{tags\$div}: Another container div with class ``landing-block foreground-content.''
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{tags\$div}: A div for text content.
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \texttt{textInput}: An input field for entering a PhotoID with extension.
+      \item
+        \texttt{actionButton}: A button for triggering an action, in this case, to view the image.
+      \item
+        \texttt{uiOutput("imageOutput")}: Placeholder for dynamic UI content (possibly an image).
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
 \hypertarget{server}{%
 \chapter{Server}\label{server}}
+
+In the server.R file we define the server side of the shiny app. The code is neatly commented so that you can navigate to the server code for each of the tab panels:
+
+\includegraphics{images/server.png}
+
+Before that though, we do some NB things:
+
+\textbf{1. Fetching Data:}
+
+Reactive expression (\texttt{survey\_data}) fetches data based on the user-selected year (\texttt{input\$year}) from a list of data frames (\texttt{all\_years\_list}). Here we subset the data for the year the user selects and store in a reactive dataframe. If you're unfamiliar with reactive expressions, refer to the Master Shiny textbook! You can also look at the useful things section of this book, where I've provided some explanations of random shiny things.
+
+The data frame corresponding to the selected year is stored in \texttt{extract\_df}, and the reactive expression returns this subset of data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey\_data }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(\{}
+\NormalTok{  extract\_df }\OtherTok{\textless{}{-}}\NormalTok{ all\_years\_list[[input}\SpecialCharTok{$}\NormalTok{year]]}
+  \FunctionTok{return}\NormalTok{(extract\_df)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{2. Taxa Names for Taxa Explorer:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{taxa\_names }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(\{}
+  \FunctionTok{sort}\NormalTok{(}\FunctionTok{unique}\NormalTok{(}\FunctionTok{survey\_data}\NormalTok{()}\SpecialCharTok{$}\NormalTok{Taxa))}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+This reactive expression (\texttt{taxa\_names}) generates a sorted list of unique taxa names based on the currently selected survey data. It is likely intended for populating a dropdown menu in the Taxa Explorer tab.
+
+\hypertarget{student-names-for-student-engagement}{%
+\subsection{3. Student Names for Student Engagement:}\label{student-names-for-student-engagement}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{student\_names }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(\{}
+  \FunctionTok{survey\_data}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{distinct}\NormalTok{(Observer, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{drop\_na}\NormalTok{(Observer) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pull}\NormalTok{(Observer)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  This reactive expression (\texttt{student\_names}) extracts unique observer (student) names from the currently selected survey data. It removes any duplicate observer names and NA values. The result is a list of student names for populating a dropdown menu in the Student Engagement tab.
+\end{itemize}
+
+\hypertarget{updating-taxa-selection}{%
+\subsection{4. Updating Taxa Selection:}\label{updating-taxa-selection}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{observeEvent}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{year,}
+\NormalTok{  \{}
+    \ControlFlowTok{if}\NormalTok{ (input}\SpecialCharTok{$}\NormalTok{year }\SpecialCharTok{==} \StringTok{"2022/2023"}\NormalTok{) \{}
+      \FunctionTok{updateSelectInput}\NormalTok{(session, }\StringTok{"taxa\_select"}\NormalTok{, }\AttributeTok{choices =} \FunctionTok{taxa\_names}\NormalTok{(), }\AttributeTok{selected =} \StringTok{"Butterflies"}\NormalTok{)}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+      \FunctionTok{updateSelectInput}\NormalTok{(session, }\StringTok{"taxa\_select"}\NormalTok{, }\AttributeTok{choices =} \FunctionTok{taxa\_names}\NormalTok{())}
+\NormalTok{    \}}
+\NormalTok{  \},}
+  \AttributeTok{ignoreNULL =} \ConstantTok{FALSE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  This \texttt{observeEvent} block reacts to changes in the selected year (\texttt{input\$year}). If the selected year is ``2022/2023,'' it updates the choices in the taxa dropdown menu (\texttt{taxa\_select}) with \texttt{taxa\_names()} and sets the default selected value to ``Butterflies.'' Otherwise, it updates the choices without a default selection.
+\end{itemize}
+
+\hypertarget{updating-student-selection}{%
+\subsection{5. Updating Student Selection:}\label{updating-student-selection}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{observeEvent}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{year,}
+\NormalTok{  \{}
+    \FunctionTok{updateSelectInput}\NormalTok{(session, }\StringTok{"student\_select"}\NormalTok{, }\AttributeTok{choices =} \FunctionTok{student\_names}\NormalTok{())}
+\NormalTok{  \},}
+  \AttributeTok{ignoreNULL =} \ConstantTok{FALSE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  This \texttt{observeEvent} block reacts to changes in the selected year (\texttt{input\$year}). It updates the choices in the student dropdown menu (\texttt{student\_select}) with \texttt{student\_names()}.
+\end{itemize}
+
+In summary, this Shiny server code dynamically updates and subsets data based on the user's selected year. It also prepares reactive expressions for taxa and student names, updating dropdown menus accordingly in the Taxa Explorer and Student Engagement tabs.
 
 \hypertarget{next-steps}{%
 \chapter{Next Steps}\label{next-steps}}
@@ -1167,6 +1952,159 @@ The pulling and preparing of the data should be made automatic, i.e.~everyday du
 \section{Survey Photos:}\label{survey-photos}}
 
 The same also applies to the photos. It might be better to pull the photos directly from OneDrive in the app. I'm not sure how to do this and maybe there's a different way to store and retrieve the photos.
+
+\hypertarget{useful-things}{%
+\chapter{Useful things}\label{useful-things}}
+
+\hypertarget{reactive-expressions}{%
+\section{Reactive Expressions}\label{reactive-expressions}}
+
+In Shiny, a reactive expression is a way to create a dynamic and responsive relationship between inputs and outputs. Reactive expressions allow you to create computations that automatically update whenever their dependencies change. This enables real-time, reactive behavior in Shiny applications.
+
+Here are key concepts related to Shiny reactive expressions:
+
+\hypertarget{reactivity}{%
+\subsection{\texorpdfstring{1. \textbf{Reactivity:}}{1. Reactivity:}}\label{reactivity}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{What is Reactivity?} Reactivity is the ability of a Shiny application to automatically respond to changes in input values, triggering updates to the corresponding output elements.
+\end{itemize}
+
+\hypertarget{understanding-reactive-expressions}{%
+\subsection{\texorpdfstring{2. \textbf{Understanding Reactive Expressions:}}{2. Understanding Reactive Expressions:}}\label{understanding-reactive-expressions}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Definition:} A reactive expression is a function that contains reactive dependencies. These dependencies are explicitly declared within the function body using reactive functions like \texttt{reactive()}, \texttt{observe()}, \texttt{eventReactive()}, etc.
+\end{itemize}
+
+\hypertarget{declaration-of-reactive-expressions}{%
+\subsection{\texorpdfstring{3. \textbf{Declaration of Reactive Expressions:}}{3. Declaration of Reactive Expressions:}}\label{declaration-of-reactive-expressions}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{reactive()}:} The \texttt{reactive()} function is used to create a reactive expression. It takes a block of code as an argument, and within that block, you can declare reactive dependencies using reactive functions.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_reactive\_expression }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(\{}
+  \CommentTok{\# Code with reactive dependencies}
+\NormalTok{  input}\SpecialCharTok{$}\NormalTok{some\_input }\SpecialCharTok{+}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{another\_input}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{dependency-tracking}{%
+\subsection{\texorpdfstring{4. \textbf{Dependency Tracking:}}{4. Dependency Tracking:}}\label{dependency-tracking}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Automatic Dependency Tracking:} When a reactive expression is created, Shiny automatically tracks the dependencies within the expression.
+\item
+  \textbf{Reactive Functions:} Reactive functions, such as \texttt{input\$}, \texttt{reactive()}, and others, signal to Shiny that the expression depends on the values they reference.
+\end{itemize}
+
+\hypertarget{use-in-output-elements}{%
+\subsection{\texorpdfstring{5. \textbf{Use in Output Elements:}}{5. Use in Output Elements:}}\label{use-in-output-elements}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Usage in Outputs:} Reactive expressions are commonly used in output elements. For example, you might use a reactive expression to calculate a plot based on user input and then render that plot in the UI.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{my\_plot }\OtherTok{\textless{}{-}} \FunctionTok{renderPlot}\NormalTok{(\{}
+  \FunctionTok{my\_reactive\_expression}\NormalTok{()}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{reactivity-in-observe-and-eventreactive}{%
+\subsection{\texorpdfstring{6. \textbf{Reactivity in \texttt{observe()} and \texttt{eventReactive()}:}}{6. Reactivity in observe() and eventReactive():}}\label{reactivity-in-observe-and-eventreactive}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{observe()}:} The \texttt{observe()} function is used for operations that don't return a value but have side effects, like printing to the console or updating a reactiveValues object.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{observe}\NormalTok{(\{}
+  \CommentTok{\# Code with reactive dependencies}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Something happened!}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{eventReactive()}:} The \texttt{eventReactive()} function is similar to \texttt{reactive()}, but it only updates when an event occurs.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reactive\_result }\OtherTok{\textless{}{-}} \FunctionTok{eventReactive}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{button\_click, \{}
+  \CommentTok{\# Code with reactive dependencies}
+\NormalTok{  input}\SpecialCharTok{$}\NormalTok{text\_input}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{use-cases}{%
+\subsection{\texorpdfstring{7. \textbf{Use Cases:}}{7. Use Cases:}}\label{use-cases}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Complex Computations:} Reactive expressions are useful for encapsulating complex computations that depend on reactive inputs.
+\item
+  \textbf{Preventing Redundant Calculations:} They help prevent redundant calculations by only recomputing when their dependencies change.
+\end{itemize}
+
+\hypertarget{performance-considerations}{%
+\subsection{\texorpdfstring{8. \textbf{Performance Considerations:}}{8. Performance Considerations:}}\label{performance-considerations}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Efficiency:} While reactive expressions provide a powerful way to create responsive applications, it's essential to be mindful of efficiency to prevent unnecessary computations.
+\end{itemize}
+
+\hypertarget{reactive-conductors}{%
+\subsection{\texorpdfstring{9. \textbf{Reactive Conductors:}}{9. Reactive Conductors:}}\label{reactive-conductors}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{reactiveVal()} and \texttt{reactiveValues()}:} These are used to create mutable reactive objects that can be read and modified in reactive contexts.
+\end{itemize}
+
+\hypertarget{isolation-of-reactivity}{%
+\subsection{\texorpdfstring{10. \textbf{Isolation of Reactivity:}}{10. Isolation of Reactivity:}}\label{isolation-of-reactivity}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{isolate()}:} In some cases, you may want to isolate certain expressions from reactivity to prevent undesired updates.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{isolated\_value }\OtherTok{\textless{}{-}} \FunctionTok{isolate}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{some\_input)}
+\end{Highlighting}
+\end{Shaded}
+
+In summary, reactive expressions are a fundamental concept in Shiny programming, allowing you to create dynamic and responsive applications by specifying the dependencies between inputs and outputs. They play a crucial role in creating interactive and data-driven user interfaces.
 
   \bibliography{book.bib,packages.bib}
 
