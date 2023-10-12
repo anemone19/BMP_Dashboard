@@ -32,7 +32,7 @@ Tab2 <- tabItem(
       tabPanel("Top 50 species", plotlyOutput("species_bar",inline=F, width= "100%")),
     ),
   box(
-    id = "box1",height="100%",width=12,
+    id = "box1",height="100%",width=12, status = "danger",
     leafletOutput("MapPlot1")
   ),
     tabBox(

@@ -43,6 +43,13 @@
     border-top-color: #CBD18F;
 }
 
+.box.box-solid.box-danger{
+    border-bottom-color: #CBD18F;
+    border-left-color: #CBD18F;
+    border-right-color: #CBD18F;
+    border-top-color: #CBD18F;
+}
+                    
 /* Content Wrapper Styles */
 .content-wrapper,
 .right-side {
