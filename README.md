@@ -1,6 +1,6 @@
 # BMP_Dashboard
 
-Welcome to the University of St Andrews Biodiversity Monitoring Program Data Dashboard repository! This Shiny App showcases biodiversity survey data collected by University of St Andrews students over the summer of 2023. I spearheaded the creation of this dashboard and spent the summer cleaning and preparing data, creating visualisations and sumamries and gaining invaluable R shiny skills! This was teh first year of the program and so the dashboard is a foundation for the next data manager to build upon and improve. 
+Welcome to the University of St Andrews Biodiversity Monitoring Program Data Dashboard repository! This Shiny App showcases biodiversity survey data collected by University of St Andrews students over the summer of 2023. This was the first year of the program and so the dashboard is a foundation for the next data manager to build upon and improve. 
 
 Explore the wonders of diverse ecosystems, gaining insights into the intricate web of life within the region of St Andrews. The dashboard is the culmination of dedicated students who immersed themselves in nature, collecting invaluable biodiversity data. Whether you're a researcher, student, or nature enthusiast, delve into the data, be inspired by the beauty of the local environment. 
 
