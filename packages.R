@@ -9,7 +9,6 @@ packages <- c(
   "ggplotify",
   "plotly",
   "sf",
-  "rgdal",
   "terra",
   "RSQLite",
   "sp",
