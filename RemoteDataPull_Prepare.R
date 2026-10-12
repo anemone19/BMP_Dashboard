@@ -4,7 +4,6 @@
 
 # Geospatial libraries
 library(sf)
-library(rgdal)
 library(terra)
 library(RSQLite)
 library(sp)
